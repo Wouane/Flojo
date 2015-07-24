@@ -1,14 +1,8 @@
-
 <?php
-//
-
 	session_start();
-
-	include("config.php");
 	//pour inclure nos librairies composer
-	include("vendor/autoload.php");
-	include("functions.php");
-	include("db.php");
+	include("includes.php");
+
 
 	//tester la soumission du formulaire avec un print_r()
 	$error = "";
@@ -104,8 +98,6 @@
 						un chiffre et un caractère spécial.";
 			}
 		}
-
-
 		//si on n'a pas d'erreur 
 		//en d'autre mots, si notre variable est encore vierge
 		if (empty($error)){
@@ -143,8 +135,7 @@
 			//on met l'array dans la session pour connecter le user
 			$_SESSION['user'] = $user;
 			//puis on redirige vers la page protégée
-			header("Location: profile.php");
+			header("Location:init_profil.php");
 			die();
 		}
-
 	}
