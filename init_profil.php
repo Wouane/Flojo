@@ -23,10 +23,13 @@
 
 	<!--<h1>Profil de <?php echo $_SESSION['user']['username']; ?></h1>-->
 	
-<h1>FLOJO init_Profil</h1>
-	
+<h1>FLOJO init_Profil</h1> 
+	<!--!!!!!!!!!!!!!attention  "action" doit pointer sur profil.php!!!!!!!!!!!!!! -->
 	<form method="POST" action="init_profil.php">
-		<input type="text" name="email" placeholder="inserer une photo" />
+		<label for="description">Inserer une photo</label>
+	</br>
+		<input type="file" name="email"/>
+	</br>
 	</br>
 	<label for="description">Entrez votre descriptif</label>
 	</br> 
