@@ -1,0 +1,66 @@
+	BDD 
+	> FLOJO
+	
+		TABLE
+			> USER 
+				> id_user
+				> email
+				> username
+				> user_picture
+				> user_description
+				> password
+				> password_confirm
+				> token
+				> token_expiry
+				> date_created
+				> date_modified
+
+			> TAGS
+				> id_tags
+				relation avec USER
+						> id_user
+
+				> tagname		
+										
+													
+			> MESSAGE 
+
+				> id
+				> (title) varchar (30)
+				> description (varchar 140)
+				> url 
+				> mess_picture
+				> date_created
+				> date_expiry
+
+
+			> FAVORITES
+
+				> id_favorites
+				> selected
+				> unselected
+
+=======================================================================================
+
+
+
+							AFFICHAGE DU MESSAGE
+							relation avec USER
+											> id_user
+											> username
+											> user_picture
+
+									> title
+									> description
+									> url
+									> mess_picture
+									> date_created
+			
+							relation avec TAG
+
+											> tagname
+
+							relation avec FAVORITES
+
+											> selected
+											
