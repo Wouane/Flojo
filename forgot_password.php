@@ -7,7 +7,6 @@
 
 		//sécurisation de l'email
 		$email = trim(strip_tags($_POST['email']));
-
 		//validation rapide
 		//email vide ?
 		if(empty($email)){
@@ -28,7 +27,7 @@
 			$sql = "SELECT *
 					FROM users
 					WHERE email = :email";
-					
+
 			$sth = $dbh->prepare($sql);
 			//l'array remplace le bindValue()
 			$sth->execute(array(":email" => $email));
@@ -59,9 +58,8 @@
 				$sth->bindValue(":id", $user['id']);
 
 				if ($sth->execute()){
-
 					//on génère le lien complet
-					$resetLink = ROOTURL . "/forgot_password_2.php?token=$token&email=$email";
+					$resetLink = ROOTURL . "/reinit_password.php?token=$token&email=$email";
 					//die($resetLink);
 
 					//instance de PHPMailer
