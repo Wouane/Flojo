@@ -1,7 +1,7 @@
 <?php 
 	session_start();
 	include("functions.php");
-	pr($_SESSION);
+	//pr($_SESSION);
 
 	//vérification que l'utilisateur est bien connecté
 
