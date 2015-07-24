@@ -1,3 +1,12 @@
+<?php 
+	session_start();
+
+	include("db.php");
+	include("functions.php");
+	include("");
+
+
+?>
 <!doctype html>
 <html lang="FR">
 		<head>
@@ -9,6 +18,12 @@
 				<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,300,700' rel='stylesheet' type='text/css'>
 		</head>
 		<body>
+
+
+
+
+
+
 			
 		</body>
 </html>
