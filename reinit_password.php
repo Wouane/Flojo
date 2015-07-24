@@ -3,7 +3,7 @@
 
 	//récupère les données de l'URL
 	if (empty($_GET['token']) || empty($_GET['email'])){
-		header("Location: http://www.disney.com");
+		header("Location: forgot_password.php");
 		die();
 	}
 
@@ -61,7 +61,6 @@
 						un chiffre et un caractère spécial.";
 			}
 		}
-
 		if ($error == ""){
 
 			$hashedPassword = password_hash($password, PASSWORD_DEFAULT);
@@ -78,13 +77,11 @@
 			$sth->bindValue(":email", $email);
 
 			if ($sth->execute()){
-				header("Location: profile.php");
+				header("Location:profil.php");
 				die();
 			}
 		}
-
 	}
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
