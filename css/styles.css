@@ -11,27 +11,43 @@
 
 body { 
 	background-color: white;
+	font-family: 'Open Sans', sans-serif;
 }
 
 /*================================================================*/
 /*===============================HOME.PHP=========================*/
 /*================================================================*/
 
-	/*DIV MAIN*/
-.main-home {
-	border:1px solid black;
-	position:relative;
-	div
+h1 {
+	text-align: center;
+	margin: 30px;
 }
 
-	/*LOGIN FORM*/
+	/*------------DIV MAIN------------*/
+.main-home {
+	width:100%;
+	margin:100px 0;
+	overflow: auto;
+}
+
+	/*------------LOGIN FORM------------*/
 .login-home {
 	border:1px solid blue;
+	width:300px;
+	right:5px;
+	float:right;
+	margin-right:100px;	
+	margin-bottom:50px;
 }
 
-	/*INSCRIPTION FORM*/
+	/*----------INSCRIPTION FORM------------*/
 .register-home {
-
+	border:1px solid red;
+	width:300px;
+	right:5px;
+	float:right;
+	clear:both;
+	margin-right:100px;	
 }
 
 
