@@ -2,10 +2,8 @@
 	session_start();
 	//pour inclure nos librairies composerinclude("db.php");
 	include("includes.php");
-
 	pr($_POST);
-	
-?>
+	?>
 <!doctype html>
 <html lang="FR">
 		<head>
