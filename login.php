@@ -1,34 +1,56 @@
-
-<?php 
+<?php
 	session_start();
-?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>Flojo connexion !</title>
-</head>
-<body>
+	include("config.php");
+	include("vendor/autoload.php");
+	include("functions.php");
+	include("db.php");
 
-	<h1>FLOJO Connexion</h1>
-	
-	<form method="POST" action="login_handler.php">
-		<input type="text" name="email" placeholder="Email ou pseudo" />
-		<input type="password" name="password" placeholder="Mot de passe" />
-		<input type="submit" value="OK" />
-	</form>
+	$email = $_POST['email'];
+	$password = $_POST['password'];
 
-	<a href="forgot_password.php">Mot de passe oublié ?</a>
+	$sql = "SELECT * FROM users 
+			WHERE email = :email 
+			OR username = :email 
+			LIMIT 1";
 
-	<?php 
-		//si on a stocké un message d'erreur (dans login_handler.php)
-		if(!empty($_SESSION['login_error'])){
-			//affiche le message d'erreur
-			echo $_SESSION['login_error']; 
-			//on a affiché le message, alors on peut le virer
-			unset($_SESSION['login_error']);
+	$sth = $dbh->prepare($sql);
+	$sth->bindValue(":email", $email);
+	$sth->execute();
+
+	$foundUser = $sth->fetch();
+
+	if ($foundUser){
+		//vérifie le mot de passe
+		/*
+		||||||| Attention : PHP 5.5 ou plus !!! |||||||||
+		||||  Sinon, depuis 5.3.7 : https://github.com/ircmaxell/password_compat
+		*/
+		$isValidPassword = password_verify($password, $foundUser['password']);
+
+		if ($isValidPassword){
+			//on préfère ne pas stocker le mdp en session, 
+			//même si pas très grave...
+			unset($foundUser['password']);
+
+			//on stocke l'array de l'utilisateur en session
+			//toutes les données seront disponible sur toutes les pages !
+			$_SESSION["user"] = $foundUser;
+
+			//redirection vers la page protégée 
+			header("Location: profile.php");
+			die();
 		}
-	?>
+		else {
+			//redirection vers login avec message d'erreur
+			$_SESSION['login_error'] = "Mauvais mot de passe !";
+			header("Location: login.php");
+			die();
+		}
 
-</body>
-</html>
+	}
+	else {
+		//redirection vers login avec message d'erreur
+		$_SESSION['login_error'] = "Utilisateur non trouvé !";
+		header("Location: login.php");
+		die();
+	}
