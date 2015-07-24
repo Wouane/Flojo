@@ -66,13 +66,32 @@ h1 {
 
 
 /*================================================================*/
-/*===============================GENERAL==========================*/
+/*===============================FORGOT_PASSWORD.PHP==========================*/
 /*================================================================*/
 
+.main-forgot-password {
+	width:100%;
+	margin:50px 0;
+	overflow: auto;
+}
 
 
+.forgot-password {
+	text-align: center;
+}
 
+.form-forgot-password {
+	margin:50px auto;
+	width:220px;
+}
 
+.email-forgot-password {
+	padding:5px;
+	}
+
+.submit-forgot-password {
+	padding:3px;
+}
 
 
 
