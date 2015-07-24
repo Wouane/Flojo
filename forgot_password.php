@@ -1,6 +1,5 @@
 <?php 
 	include("includes.php");
-
 	//si le form est soumis...
 	if (!empty($_POST)){
 
@@ -67,8 +66,8 @@
 					$mail = getConfiguredMailer();
 
 					//qui envoie, et qui reçoit
-					$mail->setFrom('accounts@wf3-auth.com', 'WF3 Auth');
-					$mail->addAddress('guillaumewf3@gmail.com', 'Guillaume Sylvestre'); //retirer en prod
+					$mail->setFrom('wouanou00@gmail.com', 'Wouane');
+					$mail->addAddress('wouanou00@gmail.com', 'Florian Wouane'); //retirer en prod
 					$mail->addAddress($email, $user['username']);
 
 					//sujet 
@@ -96,45 +95,47 @@
 				}
 			
 			}
-			
 			//sinon, erreur
 			else {
 				$error = "Cet email n'est pas inscrit ici !";
 			}
 		}
 	}
-
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>Mot de passe oublié</title>
-</head>
-<body>
-	
-	<h1>Mot de passe oublié</h1>
-
-	<p>Veuillez entrer l'adresse email utilisée lors de votre inscription.</p>
-	<p>Nous y enverrons un message permettant de créer un nouveau mot de passe.</p>
-	<form method="POST">
-		<input type="text" name="email" placeholder="Votre email" />
-		<input type="submit" value="OK" />
-	</form>
-	<div>
-	<?php 
-		if (!empty($error)){
-			echo $error;
-		}
-	?>
-	</div>
-	<div>
-	<?php 
-		if (!empty($message)){
-			echo $message;
-		}
-	?>
-	</div>
-
-</body>
+		<head>
+				<meta charset="UTF-8">
+				<title>Mot de passe oublié</title>
+				<!-- feuilles CSS -->
+				<link href="css/styles.css" type="text/css" rel="stylesheet" media="screen">
+				<!-- Font Google -->
+				<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,300,700' rel='stylesheet' type='text/css'>
+		</head>
+		<body>
+			<div class="main-forgot-password">
+				<h1 class="forgot-password">Mot de passe oublié</h1>
+				<p class="forgot-password">Veuillez entrer l'adresse email utilisée lors de votre inscription.</p>
+				<p class="forgot-password">Nous y enverrons un message permettant de créer un nouveau mot de passe.</p>
+				<form class="form-forgot-password" method="POST">
+						<input class="email-forgot-password" type="text" name="email" placeholder="Votre email" />
+						<input class="submit-forgot-password" type="submit" value="OK" />
+				</form>
+				<div class="error">
+						<?php 
+							if (!empty($error)){
+								echo $error;
+							}
+						?>
+				</div>
+				<div class="message">
+						<?php 
+							if (!empty($message)){
+								echo $message;
+							}
+						?>
+				</div>
+			</div>
+		</body>
 </html>
