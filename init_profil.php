@@ -19,7 +19,7 @@
 </head>
 <body>
 
-	<a href="logout.php" title="Me déconnecter de mon compte">Déconnexion</a>
+	
 
 	<!--<h1>Profil de <?php echo $_SESSION['user']['username']; ?></h1>-->
 	
@@ -28,12 +28,12 @@
 	<form method="POST" action="init_profil.php">
 		<label for="description">Inserer une photo</label>
 	</br>
-		<input type="file" name="email"/>
+		<input type="file" name="user_picture"/>
 	</br>
 	</br>
 	<label for="description">Entrez votre descriptif</label>
 	</br> 
-	<textarea id="description" rows="4" cols="50" > 
+	<textarea name="user_description" id="description" rows="4" cols="50" > 
 
 </textarea>
 </br>
@@ -41,6 +41,8 @@
 		<!--<input type="text" name="description" placeholder="Description" />-->
 		<input type="submit" value="OK" />
 	</form>
+</br>
+<a href="logout.php" title="Me déconnecter de mon compte">Déconnexion</a>
 
 	<!--<a href="forgot_password.php">Mot de passe oublié ?</a>-->
 
