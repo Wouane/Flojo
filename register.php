@@ -2,11 +2,8 @@
 	session_start();
 	//pour inclure nos librairies composer
 	include("includes.php");
-
-
 	//tester la soumission du formulaire avec un print_r()
 	$error = "";
-
 	//si le form est soumis...
 	if (!empty($_POST)){
 
