@@ -1,9 +1,9 @@
 <?php 
 	session_start();
 	//pour inclure nos librairies composerinclude("db.php");
-	include("functions.php");	
-	include("vendor/autoload.php");
-	include("db.php");
+	include("includes.php");
+
+	pr($_POST);
 	
 ?>
 <!doctype html>
