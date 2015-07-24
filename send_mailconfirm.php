@@ -38,7 +38,7 @@ require ("db.php");
 	$mail->isHTML(true); 
 
 	//sujet 
-	$mail->Subject = 'Envoyé par PHP !';
+	$mail->Subject = 'réinitialisation du password FLOJO !';
 
 	//message (avec balises possibles)
 	//reour sur la page formforgotmail.php
