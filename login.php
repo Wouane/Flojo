@@ -1,9 +1,8 @@
 <?php
 	session_start();
-	include("config.php");
-	include("vendor/autoload.php");
-	include("functions.php");
-	include("db.php");
+	include("includes.php");
+
+
 
 	$email = $_POST['email'];
 	$password = $_POST['password'];
@@ -37,13 +36,13 @@
 			$_SESSION["user"] = $foundUser;
 
 			//redirection vers la page protégée 
-			header("Location: profile.php");
+			header("Location: profil.php");
 			die();
 		}
 		else {
 			//redirection vers login avec message d'erreur
 			$_SESSION['login_error'] = "Mauvais mot de passe !";
-			header("Location: login.php");
+			header("Location:home.php");
 			die();
 		}
 
