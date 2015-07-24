@@ -1,5 +1,7 @@
 <?php
-// define : constante puis on l'appel en MAJ
+
+	include("config.php");
+	// define : constante puis on l'appel en MAJ
     // define("DBHOST", "localhost"); // DBHOST : serveur qui héberge le site 						// ip du serveur MySQL
     // define("DBUSER", "root"); // DBUSER par défaut root, l'herbergeur donne un autre user 		// username MySQL
     // define("DBPASS", ""); //DBPASS : sur mac le mdp est root                                    // mot de passe MySQL
