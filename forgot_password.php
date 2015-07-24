@@ -21,12 +21,14 @@
 		elseif(strlen($email) > 100){
 			$error = "Votre email est long, trop long.";
 		}
-
 		//si valide
 		if ($error == ""){
 
 			//email présent dans la base ?
-			$sql = "SELECT * FROM users WHERE email = :email";
+			$sql = "SELECT *
+					FROM users
+					WHERE email = :email";
+					
 			$sth = $dbh->prepare($sql);
 			//l'array remplace le bindValue()
 			$sth->execute(array(":email" => $email));
@@ -93,7 +95,6 @@
 				else {
 					//écrire un message dans un fichier de log
 				}
-			
 			}
 			//sinon, erreur
 			else {
