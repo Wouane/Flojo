@@ -8,15 +8,22 @@ session_start();//toujours appeler avant le html ou toutes sorties même echo
  
 ////faire l'include ("xxxxxxxx.php");
 
-/////////////////////////////////////////////////////////////////////
-////// delete des messages si message[date_exipiry] dépassée    /////
-////// un batch integrée la dbase pourrait etre plus appropriée /////     /////
-/////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+////// delete des messages si message[date_created] dépassée de 10 minutes  ////
+////// la date expiry n'a plus vraiment d'interet....       			        ////
+////// un batch integrée en event dans la dbase pourrait etre 				////
+//////  plus appropriée, a voir.....!!!!!		    								////
+////////////////////////////////////////////////////////////////////////////////
+// la bonne syntaxe....validée
+// DELETE FROM message WHERE date_created < (NOW() - INTERVAL 10 MINUTE)
+//
+// en cas de date unix integer
+// DELETE FROM message WHERE date_created < (UNIX_TIMESTAMP() - 600);
   
 
 $sql = "SELECT description
 FROM message 
-ORDER BY date_created
+ORDER BY date_created DESC
 LIMIT 5";
 $sth = $dbh ->prepare($sql);
 $sth-> execute();
