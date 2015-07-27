@@ -30,16 +30,18 @@ $sql = "SELECT *
 	$sth-> execute();
 	$messages = $sth->fetchAll();
 if(!empty($_POST)){
- $description = "";	
+// $description = "";	
 	if ($_POST['form_name'] == "2"){
 
-		$description = strip_tags($_POST['description']);
+		$description = trim(strip_tags($_POST['description']));
+		$title = trim(strip_tags($_POST['title']));
+		$url = trim(strip_tags($_POST['url']));
+		$mess_picture = trim(strip_tags($_POST['mess_picture']));
 
 		$sql = "INSERT INTO message (id_mess, title, description, url, mess_picture, date_created, date_expiry)
-				VALUES (:id_mess, :title, :description, :url, :mess_picture, NOW(), NOW())";
+				VALUES (NULL, :title, :description, :url, :mess_picture, NOW(), NOW())";
 
 		$sth = $dbh->prepare($sql);
-		$sth ->bindValue(":id_mess",$id_mess);
 		$sth ->bindValue(":title",$title);
 		$sth ->bindValue(":description",$description); 
 		$sth ->bindValue(":url",$url); 
@@ -77,7 +79,7 @@ if ($_POST['form_name'] == "1"){
 
 }
 
-print_r ($messages);
+//pr ($messages);
 ?>
 
 <!DOCTYPE html>
@@ -102,10 +104,27 @@ print_r ($messages);
 				</form>
 			</div>
 
-				<form method="POST" action="profil.php" id="add-profil-message" novalidate="novalidate">
+				<form method="POST" action="profil.php" id="add-profil-message" novalidate="novalidate" enctype="multipart/form-data">
+					
+					<div>
+					<label for="title">Saisir le Titre</label>
+					<input type="text" name="title" id="title" />
+				</div>
+			</br>
 					<label for="description">Entrez votre message</label>
 					<input type="hidden" value="2" name="form_name"/>
 					<textarea name="description" id="description" rows="4" cols="50" ></textarea>
+			</br>		
+				<div>
+					<label for="mess_picture">Inserer une photo?</label>
+						<input type="file" name="mess_picture"/>
+				</div>
+			</br>	
+				<div>
+					<label for="url">Ajouter une URL?</label>
+					<input type="url" name="url" id="url" />
+				</div>
+			</br>		
 					<input type="submit" class="add-profil-message" value="créer message"/>
 				</form>
 				</br>
