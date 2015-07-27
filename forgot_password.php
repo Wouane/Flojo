@@ -68,7 +68,8 @@
 					//qui envoie, et qui reçoit
 					$mail->setFrom('wouanou00@gmail.com', 'Wouane');
 					$mail->addAddress('wouanou00@gmail.com', 'Florian Wouane'); //retirer en prod
-					$mail->addAddress($email, $user['username']);
+					$mail->addAddress('wouaneou00@gmail.com, Florian Wouane');
+					// $mail->addAddress($email, $user['username']); // prod
 
 					//sujet 
 					$mail->Subject = 'Oubli du mot de passe chez WF3 ?';
@@ -87,7 +88,7 @@
 					if (!$mail->send()) {
 						$error = "Une erreur de survenue. Le mail n'a pas été envoyé !";
 					} else {
-						$message = "Allez voir vos mails !";
+						$message = "Merci, Allez voir vos mails !";
 					}
 				}
 				else {
@@ -103,7 +104,7 @@
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 		<head>
 				<meta charset="UTF-8">
 				<title>Mot de passe oublié</title>
