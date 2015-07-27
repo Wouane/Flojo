@@ -89,3 +89,19 @@ include ("includes.php");
 				?>
 	</body>
 </html>
+
+<!-- 	<div class="main-profil">
+			<h1 class="title-profil">Profil utilisateur</h1>
+			<div class="image-profil">
+				<img src="img/default.jpg" alt="photo-profil"/>
+			</div>
+			<form method="POST" action="profil.php" id="add-profil-message" novalidate="novalidate">
+				<label for="description">Entrez votre message</label>
+				<textarea name="description" id="description" rows="4" cols="50" ></textarea>
+				<input type="submit" class="add-profil-message" value="créer message"/>
+		</form>
+		</br>
+		<div class="logout-profil">
+			<a href="logout.php" title="Me déconnecter">Déconnexion</a>
+		</div>
+	<div class="affiche-message"> -->
