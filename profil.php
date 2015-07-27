@@ -21,23 +21,7 @@ include ("includes.php");
 //
 // en cas de date unix integer
 // DELETE FROM message WHERE date_created < (UNIX_TIMESTAMP() - 600);
-  
-
-$sql = "SELECT description
-		FROM message 
-		ORDER BY date_created DESC
-		LIMIT 5";
-
-$sth = $dbh ->prepare($sql);
-$sth-> execute();
-$messages = $sth->fetchAll();
-//////////////////////////////////////////////////////////////////////////
-////// ajouter d'autres champs, ici uniquement message[description] //////
-////// prevoir ajout d'autres champs dans d'autres tables en        //////
-////// dupliquant l'INSERT ou en le modifiant                       //////
-//////////////////////////////////////////////////////////////////////////
-
-	$description = "";	
+ $description = "";	
 	if (!empty($_POST)){
 
 		$description = strip_tags($_POST['description']);
@@ -49,6 +33,22 @@ $messages = $sth->fetchAll();
 		$sth ->bindValue(":description",$description);   
 		$sth->execute();   
 		}
+
+	$sql = "SELECT description
+			FROM message 
+			ORDER BY date_created DESC
+			LIMIT 5";
+
+	$sth = $dbh ->prepare($sql);
+	$sth-> execute();
+	$messages = $sth->fetchAll();
+//////////////////////////////////////////////////////////////////////////
+////// ajouter d'autres champs, ici uniquement message[description] //////
+////// prevoir ajout d'autres champs dans d'autres tables en        //////
+////// dupliquant l'INSERT ou en le modifiant                       //////
+//////////////////////////////////////////////////////////////////////////
+
+	
 
 ?>
 
