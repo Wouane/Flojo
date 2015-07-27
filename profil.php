@@ -90,20 +90,28 @@ print_r ($messages);
 				<div class="image-profil">
 					<img src="img/default.jpg" alt="photo-profil"/>
 				</div>
+				<div class="affiche10">
+				<form method="POST" action="profil.php" id="affiche10" novalidate="novalidate">
+				<label for="affiche10"></label>
+				<input type="hidden" value="1" name="form_name"/>
+				<input type="submit" class="affiche10" value="affichage 10 mn"/>
+				</form>
+			</div>
+
 				<form method="POST" action="profil.php" id="add-profil-message" novalidate="novalidate">
 					<label for="description">Entrez votre message</label>
+					<input type="hidden" value="2" name="form_name"/>
 					<textarea name="description" id="description" rows="4" cols="50" ></textarea>
 					<input type="submit" class="add-profil-message" value="créer message"/>
 				</form>
 				</br>
 				<div class="logout-profil">
 					<a href="logout.php" title="Me déconnecter">Déconnexion</a>
-				</div>
-				<div class="affiche-message">		
-	
-				</div>
+				</div>				
 			</div>
-				<?php
+		</br>
+	<div class="affiche-message"> 
+		<?php
 				foreach ($messages as $message) {			
 				echo '<pre>';
 				echo "<div class='profil-message'><p>".$message['description']."</p>
@@ -111,29 +119,6 @@ print_r ($messages);
 				echo '</pre>';
 				}
 				?>
-	</body>
+			</div>
+			</body>
 </html>
-
-<!-- 	<div class="main-profil">
-			<h1 class="title-profil">Profil utilisateur</h1>
-			<div class="image-profil">
-				<img src="img/default.jpg" alt="photo-profil"/>
-			</div>
-			<div class="affiche10">
-				<form method="POST" action="profil.php" id="affiche10" novalidate="novalidate">
-				<label for="affiche10"></label>
-				<input type="hidden" value="1" name="form_name"/>
-				<input type="submit" class="affiche10" value="affichage 10 mn"/>
-				</form>
-			</div>
-			<form method="POST" action="profil.php" id="add-profil-message" novalidate="novalidate">
-				<label for="description">Entrez votre message</label>
-				<textarea name="description" id="description" rows="4" cols="50" ></textarea>
-				<input type="hidden" value="2" name="form_name"/>
-				<input type="submit" class="add-profil-message" value="créer message"/>
-				</form>
-		</br>
-		<div class="logout-profil">
-			<a href="logout.php" title="Me déconnecter">Déconnexion</a>
-		</div>
-	<div class="affiche-message"> -->
