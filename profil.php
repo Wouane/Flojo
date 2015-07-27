@@ -21,8 +21,17 @@ include ("includes.php");
 //
 // en cas de date unix integer
 // DELETE FROM message WHERE date_created < (UNIX_TIMESTAMP() - 600);
+$sql = "SELECT description
+			FROM message 
+			ORDER BY date_created DESC
+			LIMIT 5";
+
+	$sth = $dbh ->prepare($sql);
+	$sth-> execute();
+	$messages = $sth->fetchAll();
+if(!empty($_POST)){
  $description = "";	
-	if (!empty($_POST)){
+	if ($_POST['form_name'] == "2"){
 
 		$description = strip_tags($_POST['description']);
 
@@ -42,14 +51,29 @@ include ("includes.php");
 	$sth = $dbh ->prepare($sql);
 	$sth-> execute();
 	$messages = $sth->fetchAll();
+
+
+if ($_POST['form_name'] == "1"){
+	$sql = "SELECT date_created, description
+			FROM message 
+			ORDER BY date_created DESC
+			LIMIT 5";
+
+	$sth = $dbh ->prepare($sql);
+	$sth-> execute();
+	$messages = $sth->fetchAll();
+}
+
+	
 //////////////////////////////////////////////////////////////////////////
 ////// ajouter d'autres champs, ici uniquement message[description] //////
 ////// prevoir ajout d'autres champs dans d'autres tables en        //////
 ////// dupliquant l'INSERT ou en le modifiant                       //////
 //////////////////////////////////////////////////////////////////////////
 
-	
+}
 
+print_r ($messages);
 ?>
 
 <!DOCTYPE html>
@@ -95,11 +119,19 @@ include ("includes.php");
 			<div class="image-profil">
 				<img src="img/default.jpg" alt="photo-profil"/>
 			</div>
+			<div class="affiche10">
+				<form method="POST" action="profil.php" id="affiche10" novalidate="novalidate">
+				<label for="affiche10"></label>
+				<input type="hidden" value="1" name="form_name"/>
+				<input type="submit" class="affiche10" value="affichage 10 mn"/>
+				</form>
+			</div>
 			<form method="POST" action="profil.php" id="add-profil-message" novalidate="novalidate">
 				<label for="description">Entrez votre message</label>
 				<textarea name="description" id="description" rows="4" cols="50" ></textarea>
+				<input type="hidden" value="2" name="form_name"/>
 				<input type="submit" class="add-profil-message" value="créer message"/>
-		</form>
+				</form>
 		</br>
 		<div class="logout-profil">
 			<a href="logout.php" title="Me déconnecter">Déconnexion</a>
