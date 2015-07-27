@@ -22,6 +22,15 @@ $sql = "SELECT *
 	$sth = $dbh ->prepare($sql);
 	$sth-> execute();
 	$messages = $sth->fetchAll();
+
+/*$sql = "SELECT username, user_description
+			FROM user 
+			WHERE username
+			LIMIT 5";
+
+	$sth = $dbh ->prepare($sql);
+	$sth-> execute();
+	$messages = $sth->fetchAll();"*/	
 if(!empty($_POST)){
 // $description = "";	
 	if ($_POST['form_name'] == "2"){
