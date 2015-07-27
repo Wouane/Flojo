@@ -21,7 +21,7 @@ include ("includes.php");
 //
 // en cas de date unix integer
 // DELETE FROM message WHERE date_created < (UNIX_TIMESTAMP() - 600);
-$sql = "SELECT description
+$sql = "SELECT *
 			FROM message 
 			ORDER BY date_created DESC
 			LIMIT 5";
@@ -35,11 +35,15 @@ if(!empty($_POST)){
 
 		$description = strip_tags($_POST['description']);
 
-		$sql = "INSERT INTO message (description, date_created, date_expiry)
-				VALUES (:description, NOW(), NOW())";
+		$sql = "INSERT INTO message (id_mess, title, description, url, mess_picture, date_created, date_expiry)
+				VALUES (:id_mess, :title, :description, :url, :mess_picture, NOW(), NOW())";
 
 		$sth = $dbh->prepare($sql);
-		$sth ->bindValue(":description",$description);   
+		$sth ->bindValue(":id_mess",$id_mess);
+		$sth ->bindValue(":title",$title);
+		$sth ->bindValue(":description",$description); 
+		$sth ->bindValue(":url",$url); 
+		$sth ->bindValue(":mess_picture",$mess_picture); 
 		$sth->execute();   
 		}
 
