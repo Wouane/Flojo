@@ -88,7 +88,10 @@ if ($_POST['form_name'] == "1"){
 			<div class="main-profil">
 				<div class="image-profil">
 					<img src="img/default.jpg" alt="photo-profil"/>
+					<p>username </p>
+					<p>user description table user </p>
 				</div>
+
 				<div class="affiche10">
 				<form method="POST" action="profil.php" id="affiche10" novalidate="novalidate">
 				<label for="affiche10"></label>
