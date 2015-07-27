@@ -1,12 +1,14 @@
 <?php
-session_start();//toujours appeler avant le html ou toutes sorties même echo
+session_start();
+
+//toujours appeler avant le html ou toutes sorties même echo
 ////////////////////////////////////////////////////////////////////////////////////
 ////// ****ICI**** faire l'include  des parametres  de connexion à la base    //////
 ////// contenant: hostname, database_name, name, password                      /////
 ////// malheureusement dangereux a passer dans github                          /////
 ////////////////////////////////////////////////////////////////////////////////////
  
-////faire l'include ("xxxxxxxx.php");
+include ("includes.php");
 
 ////////////////////////////////////////////////////////////////////////////////
 ////// delete des messages si message[date_created] dépassée de 10 minutes  ////
@@ -22,9 +24,10 @@ session_start();//toujours appeler avant le html ou toutes sorties même echo
   
 
 $sql = "SELECT description
-FROM message 
-ORDER BY date_created DESC
-LIMIT 5";
+		FROM message 
+		ORDER BY date_created DESC
+		LIMIT 5";
+
 $sth = $dbh ->prepare($sql);
 $sth-> execute();
 $messages = $sth->fetchAll();
@@ -36,41 +39,46 @@ $messages = $sth->fetchAll();
 
 	$description = "";	
 	if (!empty($_POST)){
-		$description = strip_tags($_POST['description']);	
+
+		$description = strip_tags($_POST['description']);
+
 		$sql = "INSERT INTO message (description, date_created, date_expiry)
-		VALUES (:description, NOW(), NOW())";
+				VALUES (:description, NOW(), NOW())";
+
 		$sth = $dbh->prepare($sql);
 		$sth ->bindValue(":description",$description);   
 		$sth->execute();   
-	}
-	?>
-	<!DOCTYPE html>
-	<html lang="en">
+		}
+
+?>
+
+<!DOCTYPE html>
+<html lang="Fr">
 	<head>
 		<meta charset="UTF-8">
-		<title>Mot de passe oublié</title>
+		<title>Page profil</title>
 		<link href="css/styles.css" type="text/css" rel="stylesheet" media="screen">
 		<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,300,700' rel='stylesheet' type='text/css'>
 	</head>
 	<body>
-		<div class="main-profil" style="float:right">
+		<div class="main-profil">
 			<h1 class="title-profil">Profil utilisateur</h1>
 			<div class="image-profil">
 				<img src="img/default.jpg" alt="photo-profil"/>
 			</div>
+			<form method="POST" action="profil.php" id="add-profil-message" novalidate="novalidate">
+				<label for="description">Entrez votre message</label>
+				<textarea name="description" id="description" rows="4" cols="50" ></textarea>
+				<input type="submit" class="add-profil-message" value="créer message"/>
+		</form>
 		</br>
-		<label for="description">Entrez votre message</label>
-	</br>
-	<form method="POST" action="profil.php" id="add-profil-message" novalidate="novalidate">
-		<textarea name="description" id="description" rows="4" cols="50" ></textarea>
-		<button type="submit" class="add-profil-message"/>Creer message</button>
-	</form>
-</br>
-<div class="logout-profil">
-	<a href="logout.php" title="Me déconnecter">Déconnexion</a>
-</div>
-<div class="affiche-message">		
-</br>
+		<div class="logout-profil">
+			<a href="logout.php" title="Me déconnecter">Déconnexion</a>
+		</div>
+	<div class="affiche-message">		
+	
+	</div>
+
 <?php
 foreach ($messages as $message) {			
 	echo '<pre>';
