@@ -7,13 +7,22 @@
 	//sinon... on ne fait rien et la page ci-dessous s'affichera
 
 
+	$user_description = trim(strip_tags($_POST['user_description']));
+	$user_picture = trim(strip_tags($_POST['user_picture']));
 
+	if(!empty($_POST)){
 
+	$sql = "INSERT INTO users (user_description, user_picture)
+			VALUES (:user_description, :user_picture)";
 
+	$sth->bindValue(":user_description", $user_description);
+	$sth->bindValue(":user_picture", $user_description);
 
+	$sth = $dbh->prepare($sql);
+	$sth->execute();
+	$profil_user = $sth->fetchAll();
 
-
-
+	}
 
 ?>
 
@@ -38,11 +47,11 @@
 				<h1>Bonjour</h1>
 				<div class="main-init-profil">
 				<form class="form-init-profil" method="POST" enctype="multipart/form-data">
-						<label for="description">Entrez votre Bio</label>
+						<label for="user_description">Entrez votre Bio</label>
 						</br> 
 						<textarea name="user_description" id="description" rows="4" cols="50" placeholder="Max 140 caractères" ></textarea>
 						</br>					
-						<label for="description">Photo de profil : </label>
+						<label for="user_picture">Photo de profil : </label>
 						<input type="file" name="user_picture"/>
 						</br>
 						<input class="submit-init-profil" type="submit" value="Valider"/>
