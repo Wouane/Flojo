@@ -79,9 +79,39 @@ h1 {
 	padding:3px;
 }
 
+.error {
+	color:#F44336;
+	text-align: center;
+}
+
+.message {
+	color:#00E676;
+	text-align: center;
+}
+
+
 /*================================================================*/
-/*===============================INIT_PASSWORD.PHP=================*/
+/*===============================REINIT_PASSWORD.PHP=================*/
 /*================================================================*/
+
+.main-init-password {
+	width:100%;
+	margin:50px 0;
+	overflow: auto;
+}
+
+p.init-password {
+	text-align: center;
+}
+
+.form-init-password {
+	margin:10px auto;
+	width:220px;
+}
+
+input.submit-init-password {
+	margin-top:5px;
+}
 
 
 
