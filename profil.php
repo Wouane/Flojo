@@ -61,32 +61,31 @@ include ("includes.php");
 		<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,300,700' rel='stylesheet' type='text/css'>
 	</head>
 	<body>
-		<div class="main-profil">
-			<h1 class="title-profil">Profil utilisateur</h1>
-			<div class="image-profil">
-				<img src="img/default.jpg" alt="photo-profil"/>
-			</div>
-			<form method="POST" action="profil.php" id="add-profil-message" novalidate="novalidate">
-				<label for="description">Entrez votre message</label>
-				<textarea name="description" id="description" rows="4" cols="50" ></textarea>
-				<input type="submit" class="add-profil-message" value="créer message"/>
-		</form>
-		</br>
-		<div class="logout-profil">
-			<a href="logout.php" title="Me déconnecter">Déconnexion</a>
-		</div>
-	<div class="affiche-message">		
+			<h2 class="title-profil">Bienvenue sur votre page profil<?php echo $_SESSION['user']['username']; ?></h2>
+			<div class="main-profil">
+				<div class="image-profil">
+					<img src="img/default.jpg" alt="photo-profil"/>
+				</div>
+				<form method="POST" action="profil.php" id="add-profil-message" novalidate="novalidate">
+					<label for="description">Entrez votre message</label>
+					<textarea name="description" id="description" rows="4" cols="50" ></textarea>
+					<input type="submit" class="add-profil-message" value="créer message"/>
+				</form>
+				</br>
+				<div class="logout-profil">
+					<a href="logout.php" title="Me déconnecter">Déconnexion</a>
+				</div>
+				<div class="affiche-message">		
 	
-	</div>
-
-<?php
-foreach ($messages as $message) {			
-	echo '<pre>';
-	echo "<div class='profil-message'><p>".$message['description']."</p>
-	</div>";
-	echo '</pre>';
-}
-?>
-</div>	
-</div>	
-</body>
+				</div>
+			</div>
+				<?php
+				foreach ($messages as $message) {			
+				echo '<pre>';
+				echo "<div class='profil-message'><p>".$message['description']."</p>
+				</div>";
+				echo '</pre>';
+				}
+				?>
+	</body>
+</html>
