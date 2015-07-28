@@ -153,3 +153,8 @@ input.submit-init-password {
 input.submit-init-profil {
 		margin-top:5px;
 }
+
+.init-profil-error {
+	text-align:center;
+	color:color:#F44336;;
+}
