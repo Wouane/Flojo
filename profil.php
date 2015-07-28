@@ -29,22 +29,31 @@ include ("includes.php");
 
 		$sql = "SELECT username, user_description
 				FROM users 
-				WHERE id = :id
-				--AND user_description = :user_description";
+				WHERE id = :id";
 
 		$sth = $dbh ->prepare($sql);
 		$sth-> bindValue(":id", $_SESSION['user']['id']);
-		//$sth-> bindValue(":user_description", $_SESSION['user']['user_description']);
+		// $sth-> bindValue(":user_description", $_SESSION['user']['user_description']);
+
 		$sth-> execute();
+		$profile_user = $sth->fetchAll();
 
-		$user_description = $sth->fetch();
+		pr($profile_user);
 
-		// ||||||||||||||||||||||||||||||||||||||||||||||||||
+
+
+
+
+			// ---------------------------------------------------------------------------
+		// ||||||||||||||||||||INSERTION DU MESSAGE SUR LA PAGE||||||||||||||||||||||||||||||
+			// ---------------------------------------------------------------------------
+
+
 
 if(!empty($_POST)){
 
 		if ($_POST['form_name'] == "2"){
-
+			// |||||||||||||INSCRIPTION MESSAGE DANS LA BDD
 			$description = trim(strip_tags($_POST['description']));
 			$title = trim(strip_tags($_POST['title']));
 			$url = trim(strip_tags($_POST['url']));
@@ -61,6 +70,10 @@ if(!empty($_POST)){
 			$sth->execute();   
 		}
 
+		// ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+		//      AFFICHAGE MESSAGE SUR PAGE PROFIL.PHP
+
+		
 		$sql = "SELECT description
 				FROM message 
 				ORDER BY date_created DESC
@@ -110,7 +123,7 @@ if(!empty($_POST)){
 					<div class="image-profil">
 						<img src="img/default.jpg" alt="photo-profil"/>
 						<p><?php echo $_SESSION['user']['username']; ?></p>
-						<p><?php echo $_SESSION['user']['user_decription']; ?></p>
+						<p><?php echo $_SESSION['user']['user_description']; ?></p>
 					</div>
 
 			<div class="affiche10">
