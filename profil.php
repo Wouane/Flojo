@@ -25,14 +25,15 @@ include ("includes.php");
 
 		$messages = $sth->fetchAll();
 
-/*		$sql = "SELECT username, user_description
+		$sql = "SELECT username, user_description
 				FROM user 
-				WHERE username
-				LIMIT 5";
+				WHERE id = :id"
+				;
 
 		$sth = $dbh ->prepare($sql);
+		$sth-> bindValue(":id", $dbh->lastInsertId());
 		$sth-> execute();
-		$messages = $sth->fetchAll();"*/
+		$description_user = $sth->fetch();
 
 if(!empty($_POST)){
 
@@ -102,8 +103,8 @@ if(!empty($_POST)){
 			<div class="main-profil">
 					<div class="image-profil">
 						<img src="img/default.jpg" alt="photo-profil"/>
-						<p>username </p>
-						<p>user description table user </p>
+						<p><?php echo $_SESSION['user']['username']; ?></p>
+						<p><?php echo $_SESSION['user']['user_decription']; ?></p>
 					</div>
 
 			<div class="affiche10">
