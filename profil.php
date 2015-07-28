@@ -28,15 +28,16 @@ include ("includes.php");
 		// ||||||||||||||  AFFICHAGE USERNAME + USER_DESCRIPTION SOUS USER_PICTURE
 
 		$sql = "SELECT username, user_description
-				FROM user 
-				WHERE id = :id"
-				;
+				FROM users 
+				WHERE id = :id
+				--AND user_description = :user_description";
 
 		$sth = $dbh ->prepare($sql);
-		$sth-> bindValue(":id", $dbh->lastInsertId());
+		$sth-> bindValue(":id", $_SESSION['user']['id']);
+		//$sth-> bindValue(":user_description", $_SESSION['user']['user_description']);
 		$sth-> execute();
 
-		$description_user = $sth->fetch();
+		$user_description = $sth->fetch();
 
 		// ||||||||||||||||||||||||||||||||||||||||||||||||||
 
