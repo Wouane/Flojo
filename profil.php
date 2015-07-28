@@ -73,7 +73,7 @@ if(!empty($_POST)){
 		// ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 		//      AFFICHAGE MESSAGE SUR PAGE PROFIL.PHP
 
-		
+
 		$sql = "SELECT description
 				FROM message 
 				ORDER BY date_created DESC
