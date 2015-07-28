@@ -14,16 +14,18 @@ include ("includes.php");
 // en cas de date unix integer
 // DELETE FROM message WHERE date_created < (UNIX_TIMESTAMP() - 600);
 
+		// ||||||||||||||  AFFICHAGE MESSAGE
+		
 		$sql = "SELECT *
 				FROM message 
 				ORDER BY date_created DESC
 				LIMIT 5";
 		
 		$sth = $dbh->prepare($sql);
-		
-		$sth->execute();
-
+				$sth->execute();
 		$messages = $sth->fetchAll();
+
+		// ||||||||||||||  AFFICHAGE USERNAME + USER_DESCRIPTION SOUS USER_PICTURE
 
 		$sql = "SELECT username, user_description
 				FROM user 
@@ -33,7 +35,10 @@ include ("includes.php");
 		$sth = $dbh ->prepare($sql);
 		$sth-> bindValue(":id", $dbh->lastInsertId());
 		$sth-> execute();
+
 		$description_user = $sth->fetch();
+
+		// ||||||||||||||||||||||||||||||||||||||||||||||||||
 
 if(!empty($_POST)){
 
