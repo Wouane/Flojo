@@ -3,7 +3,8 @@ session_start();
 
 include ("includes.php");
 //charge simpleimage (et autres bibliothèque installées par composer)
-require("vendor/autoload.php");
+// require("vendor/autoload.php");
+// 
 ////////////////////////////////////////////////////////////////////////////////
 ////// delete des messages si message[date_created] dépassée de 10 minutes  ////
 ////// la date expiry n'a plus vraiment d'interet....       			        ////
@@ -213,8 +214,8 @@ if(!empty($_POST)){
 //////////////////////////////////////////////////////////////////////////
 
 }
+pr($messages);
 
-//pr($messages);
 ?>
 
 <!DOCTYPE html>
@@ -228,13 +229,28 @@ if(!empty($_POST)){
 			<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,300,700' rel='stylesheet' type='text/css'>
 		</head>
 		<body>
+			<!-- TITRE DE LA PAGE -->
 			<h2 class="title-profil">Bienvenue sur votre page profil<?php echo $_SESSION['user']['username']; ?></h2>
+			<!-- VIGNETTE USER_PICTURE + USERNAME + USER_DESCRIPTION -->
 			<div class="main-profil">
+
+				<!-- VIGNETTE USER_PICTURE + USERNAME + USER_DESCRIPTION -->
+
 					<div class="image-profil">
-						<img src="img/default.jpg" alt="photo-profil"/>
+						<!-- il faut insérer l'image ci dessous -->
+						<div class="user_picture">
+							<img src="img/default.jpg" alt="photo-profil"/>
+						</div>
+						<!-- Pseudo user -->
 						<p><?php echo $_SESSION['user']['username'];?></p>
+						<!-- Bio user -->
 						<p><?php echo $_SESSION['user']['user_description'];?></p>
+
 					</div>
+					<!-- ............................................ -->
+					
+								<!-- BOUTON AFFICHE 10MIN -->
+
 
 			<div class="affiche10">
 			<form method="POST" action="profil.php" id="affiche10" novalidate="novalidate">
@@ -243,40 +259,52 @@ if(!empty($_POST)){
 			</form>
 			</div>
 
+					<!-- ............................................ -->
+
+							<!-- FORM POUR ECRIRE LE MESSAGE (tweet) -->
+
 			<form method="POST" action="profil.php" id="add-profil-message" novalidate="novalidate" enctype="multipart/form-data">
 				<input type="hidden" value="2" name="form_name"/>
-					<!-- TITRE DU MESSAGE  -->
+
+							<!-- TITRE DU MESSAGE  -->
 				<!-- <label for="title">Saisir le Titre</label></br> -->
 				<input type="text" name="title" id="title" placeholder="Tapez votre titre"/>
 				</br>
-					<!-- INTITULE DU MESSAGE  -->
+
+							<!-- INTITULE DU MESSAGE  -->
 				<!-- <label for="description">Entrez votre message</label></br> -->
 				<textarea name="description" id="description" rows="4" cols="50" placeholder="Tapez votre description" ></textarea>
-				</br>		
-					<!-- UPLOADE PHOTO  -->
+				</br>
+
+							<!-- UPLOADE PHOTO  -->
 				<label for="pic">Inserer une photo?</label>
 				<input type="file" name="pic"/>
-				</br>	
-					<!-- UPLOAD URL  -->
+				</br>
+
+								<!-- UPLOAD URL  -->
 				<!-- <label for="url">Ajouter une URL?</label> -->
 				<input type="url" name="url" id="url" placeholder="Votre URL" />
 				</br>	
 					<!-- CREER LE MESSAGE  -->	
 				<input type="submit" class="add-profil-message" value="créer message"/>
 			</form>
+
+						<!-- ............................................ -->
+
 				</br>
 				<a class="logout" href="logout.php" title="Me déconnecter">Déconnexion</a>
 			</div>
 		</br>
-	<div class="affiche-message"> 
-		<?php
-				foreach ($messages as $message) {			
-				echo '<pre>';
-				echo "<div class='profil-message'><p>".$message['description']."</p>
-				</div>";
-				echo '</pre>';
+						<!-- AFFICHAGE DES MESSAGEs (tweet) -->
+
+		<div class="affiche-message"> 
+				<?php
+					foreach ($messages as $message) {			
+					echo '<pre>';
+					echo "<div class='profil-message'><p>".$message['description']."</p></div>";
+					echo '</pre>';
 				}
 				?>
-			</div>
-			</body>
+		</div>
+	</body>
 </html>
