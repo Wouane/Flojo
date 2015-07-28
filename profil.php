@@ -2,6 +2,8 @@
 session_start();
 
 include ("includes.php");
+//charge simpleimage (et autres bibliothèque installées par composer)
+require("vendor/autoload.php");
 ////////////////////////////////////////////////////////////////////////////////
 ////// delete des messages si message[date_created] dépassée de 10 minutes  ////
 ////// la date expiry n'a plus vraiment d'interet....       			        ////
@@ -40,7 +42,114 @@ include ("includes.php");
 
 		pr($profile_user);
 
+//////////INSERTION PHOTO///////////////////////////////
 
+
+
+
+$maxSize = 5000000; //5 Mo à peu près
+$acceptedMimes = array("image/jpeg", "image/gif", "image/png");
+$acceptedExtensions = array("jpeg", "jpg", "gif", "png"); //qui sait...
+$minWidth = 150;
+$minHeight = 150;
+
+//si on a des fichiers uploadés...
+if(!empty($_FILES['pic']) && $_FILES['pic']['error'] !=4){
+
+	//iniatilisation de notre variable d'erreur
+	$error = "";
+
+	echo '<pre style="background-color: #2c3e50; color: #fff; font-size: 14px; font-family: Consolas, Monospace; padding: 20px;">';
+	print_r($_FILES);
+	echo '</pre>';
+
+	//chemin vers le fichier uploadé
+	$tmpName = $_FILES['pic']['tmp_name'];
+
+	//erreurs d'upload détectées par PHP ?
+	if ($_FILES['pic']['error'] != 0){
+		switch ($_FILES['pic']['error']) {
+			case 1:
+				//par rapport au php.ini...
+				$error = "Votre fichier est trop gros !";
+				break;
+			case 4:
+				//peut ne pas être une erreur si le fichier est optionnel...
+				$error = "Aucun fichier n'a été sélectionné !";
+				break;
+			default:
+				$error = "Une erreur est survenue lors du chargement du fichier !";
+				break;
+		}
+	}
+
+	//poids de l'image ok ?
+	if ($_FILES['pic']['size'] > $maxSize){
+		$error = "Votre image est trop lourde ! $maxSize octets maximum !";
+	}
+
+	//largeur et hauteur ok ?
+	$imageSizes = getimagesize($tmpName);
+	if ($imageSizes[0] < $minWidth){
+		$error = "Votre image n'est pas assez large ! $minWidth pixels minimum !";
+	}
+	elseif($imageSizes[1] < $minHeight){
+		$error = "Votre image n'est pas assez haute ! $minHeight pixels minimum !";
+	}
+
+	//extension du fichier
+	$ext = pathinfo($_FILES['pic']['name'], PATHINFO_EXTENSION);
+
+	//extension dans notre white list ?
+	if (!in_array($ext, $acceptedExtensions)){
+		$error = "Ce type de fichier n'est pas accepté !";
+	}
+
+	//vérifie le type mime
+	$finfo = finfo_open(FILEINFO_MIME_TYPE);
+	$mime = finfo_file($finfo, $tmpName);
+
+	//le type mime détecté est accepté ?
+	if (!in_array($mime, $acceptedMimes)){
+		$error = "Type de fichier refusé !";
+	}
+
+	//si on n'a pas détecté d'erreurs, on poursuit avec l'upload...
+	if(empty($error)){
+
+		//nouveau nom du fichier, sécuritaire (contre les XSS, les espaces, les guillemets, etc.)
+		$newName = md5($tmpName . time() . uniqid()) . "." . $ext;
+
+		//chemin vers le répertoire où nous déplacerons l'image
+		$destinationDirectory = __DIR__ . "/img/uploads/";
+
+		//si le fichier existe déjà avec ce nom (malheureux hasard)
+		if (file_exists($destinationDirectory."originals/".$newName)){
+			//on ajoute un identifiant unique à la fin du fichier
+			$newName = md5($tmpName . time() . uniqid()) . uniqid() . "." . $ext;
+		}
+
+		//déplace le fichier temporaire vers un autre répertoire sur notre serveur
+		move_uploaded_file($tmpName, $destinationDirectory."originals/".$newName);
+
+		$img = new abeautifulsite\SimpleImage($destinationDirectory."originals/".$newName);
+		//mediums
+		$img->best_fit(600,600)->save($destinationDirectory."mediums/".$newName);
+		//thumbnails
+		$img->thumbnail(150,150)->sepia()->save($destinationDirectory."thumbnails/".$newName);
+
+	}
+	//erreur présente donc...
+	else {
+		//rediriger avec un message d'erreur vers la page contenant le form
+		echo $error;
+	}
+}
+
+
+
+
+/////////////////////////////////////////////////////////		
 
 
 
@@ -122,8 +231,8 @@ if(!empty($_POST)){
 			<div class="main-profil">
 					<div class="image-profil">
 						<img src="img/default.jpg" alt="photo-profil"/>
-						<p><?php echo $_SESSION['user']['username']; ?></p>
-						<p><?php echo $_SESSION['user']['user_description']; ?></p>
+						<p><?php echo $_SESSION['user']['username'];?></p>
+						<p><?php echo $_SESSION['user']['user_description'];?></p>
 					</div>
 
 			<div class="affiche10">
@@ -144,8 +253,8 @@ if(!empty($_POST)){
 				<textarea name="description" id="description" rows="4" cols="50" placeholder="Tapez votre description" ></textarea>
 				</br>		
 					<!-- UPLOADE PHOTO  -->
-				<label for="mess_picture">Inserer une photo?</label>
-				<input type="file" name="mess_picture"/>
+				<label for="pic">Inserer une photo?</label>
+				<input type="file" name="pic"/>
 				</br>	
 					<!-- UPLOAD URL  -->
 				<!-- <label for="url">Ajouter une URL?</label> -->
