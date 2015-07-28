@@ -71,7 +71,7 @@
 				</form>
 				
 					<!-- Erreurs du form init profil php -->
-				<div class="error">
+				<div class="init-profil-error">
 					<?php 
 						if (!empty($error)){
 						echo '<div>' . $error . '</div>';
