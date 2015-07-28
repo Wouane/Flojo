@@ -36,7 +36,7 @@
 			$_SESSION["user"] = $foundUser;
 
 			//redirection vers la page protégée 
-			header("Location: profil.php");
+			header("Location:profil.php");
 			die();
 		}
 		else {
@@ -50,6 +50,6 @@
 	else {
 		//redirection vers login avec message d'erreur
 		$_SESSION['login_error'] = "Utilisateur non trouvé !";
-		header("Location: login.php");
+		header("Location:home.php");
 		die();
 	}
