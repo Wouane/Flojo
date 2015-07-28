@@ -6,21 +6,34 @@
 	//lock();
 	//sinon... on ne fait rien et la page ci-dessous s'affichera
 
-
-	$user_description = trim(strip_tags($_POST['user_description']));
-	$user_picture = trim(strip_tags($_POST['user_picture']));
-
 	if(!empty($_POST)){
+	//initialisation des variables
+	$user_description = trim(strip_tags($_POST['user_description']));
+	// $user_picture = ;
+	
+	//VALIDATION
+		// si le champ description est vide
 
-	$sql = "INSERT INTO users (user_description, user_picture)
-			VALUES (:user_description, :user_picture)";
+	// champ bio vide ?
+	if(empty($user_description)){
+		$error = "Veuillez renseignez votre bio";
+	}
+	// bio trop grande ?
+	elseif(strlen($user_description) > 140){
+		$error = "Votre biographie est trop grande";
+	}
 
-	$sth->bindValue(":user_description", $user_description);
-	$sth->bindValue(":user_picture", $user_description);
+	$sql = "UPDATE users 
+			SET user_description = :user_description,
+			date_modified = NOW()
+			WHERE id = :id";
 
 	$sth = $dbh->prepare($sql);
+	$sth->bindValue(":user_description", $user_description);
+	// $sth->bindValue(":user_picture", $user_picture);
+	$sth->bindValue(":id", $_SESSION['user']['id']);
+	// $sth->bindValue(":user_picture", $user_picture);
 	$sth->execute();
-	$profil_user = $sth->fetchAll();
 
 	}
 
@@ -44,8 +57,8 @@
 	</head>
 	<body>	
 				<!-- Bonjour nom user + username -->
-				<h1>Bonjour</h1>
-				<div class="main-init-profil">
+			<h1>Bonjour <?php echo $_SESSION['user']['username']; ?></h1>
+			<div class="main-init-profil">
 				<form class="form-init-profil" method="POST" enctype="multipart/form-data">
 						<label for="user_description">Entrez votre Bio</label>
 						</br> 
@@ -56,18 +69,17 @@
 						</br>
 						<input class="submit-init-profil" type="submit" value="Valider"/>
 				</form>
-				</div>
-				<a class="logout" href="logout.php" title="Me déconnecter de mon compte">Déconnexion</a>
+				
 					<!-- Erreurs du form init profil php -->
+				<div class="error">
 					<?php 
-							//si on a stocké un message d'erreur (dans login_handler.php)
-					if(!empty($_SESSION['login_error'])){
-								//affiche le message d'erreur
-						echo $_SESSION['login_error']; 
-								//on a affiché le message, alors on peut le virer
-						unset($_SESSION['login_error']);
-					}
+						if (!empty($error)){
+						echo '<div>' . $error . '</div>';
+						}
 					?>
-					<!-- -->		
+					<!-- -->
+				</div>
+			</div>		
+			<a class="logout" href="logout.php" title="Me déconnecter de mon compte">Déconnexion</a>
 	</body>
 </html>
