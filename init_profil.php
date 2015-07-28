@@ -11,17 +11,23 @@
 	$user_description = trim(strip_tags($_POST['user_description']));
 	// $user_picture = ;
 	
-	//VALIDATION
+	// ||||||||||||||||| VALIDATION
+
 		// si le champ description est vide
 
 	// champ bio vide ?
 	if(empty($user_description)){
 		$error = "Veuillez renseignez votre bio";
 	}
+
 	// bio trop grande ?
 	elseif(strlen($user_description) > 140){
 		$error = "Votre biographie est trop grande";
 	}
+
+	// --------------------------------------------------------------
+	// ||||||||||||||||||||||||||||||||UPDATE INSERT BDD WITH USER_DESCRIPTION
+	// -------------------------------------------------------------
 
 	$sql = "UPDATE users 
 			SET user_description = :user_description,
@@ -35,16 +41,18 @@
 	// $sth->bindValue(":user_picture", $user_picture);
 	$sth->execute();
 
-	
+	// --------------------------------------------------------------
+	// ||||||||||||||||||||||||||||||||UPDATE INSERT BDD WITH USER_PICTURE
+	// -------------------------------------------------------------
+
+	$acceptedMimes = array("image/jpeg", "image/gif", "image/png");
+	$acceptedExtensions = array("jpeg", "jpg", "gif", "png");
+	$maxSize = 1000000;
+	$minWidth = 100;
+	$minHeight = 100;
 
 	}
-
 ?>
-
-
-
-
-
 
 
 <!DOCTYPE html>
