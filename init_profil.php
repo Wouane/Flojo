@@ -35,6 +35,8 @@
 	// $sth->bindValue(":user_picture", $user_picture);
 	$sth->execute();
 
+	
+
 	}
 
 ?>
