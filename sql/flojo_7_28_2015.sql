@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 28, 2015 at 09:15 AM
+-- Generation Time: Jul 28, 2015 at 05:32 PM
 -- Server version: 5.6.24
 -- PHP Version: 5.6.8
 
@@ -19,6 +19,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `flojo`
 --
+CREATE DATABASE IF NOT EXISTS `flojo` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `flojo`;
 
 -- --------------------------------------------------------
 
@@ -88,7 +90,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `token_expiry` datetime NOT NULL,
   `date_created` datetime NOT NULL,
   `date_modified` datetime DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `users`
@@ -102,7 +104,10 @@ INSERT INTO `users` (`id`, `email`, `username`, `user_description`, `user_pictur
 (5, 'Coucou@gmail.com', 'coucou', NULL, '', '$2y$10$Mw5WIXLaYjz8i1ZImHJf7e7SJeDMCnH0WjpcWF3PCFYLVPpA44IS2', '', '$2y$10$ckJ0xQyXrxxN77bsIZ4j7Objc7Ryn37pC3DVQ/cx4G7vCOL/cx.GK', '2015-07-28 14:56:48', '2015-07-27 14:56:02', '2015-07-27 14:56:48'),
 (6, 'poupou@gmail.com', 'poupou', NULL, '', '$2y$10$OuzqH1OwiVtRp8JMXFO9QOYKW5cx.vy6qkbD03XWKazCDph0wqRVy', '', '$2y$10$e4ehmN6ArYMbaj/7uwJo5OI9g.M6rFGRZH1j5AjvNJagsRNoBPYXe', '2015-07-28 15:14:41', '2015-07-27 15:10:53', '2015-07-27 15:14:41'),
 (7, 'ouanou@gmail.com', 'ouanou', NULL, '', '$2y$10$Bn4jQaso.waT8NuRATkYdOELIWntt2GUqVjWRBZQMkVm.gcFwR60e', '', '', '0000-00-00 00:00:00', '2015-07-27 16:09:11', NULL),
-(8, 'depardieu@gmail.com', 'Depardieu', NULL, '', '$2y$10$TXbwp3V.MrHRPpIGPfbJfe8.96VhuSqgFQQqWu/GIc1OBs7E28dIm', '', '', '0000-00-00 00:00:00', '2015-07-27 16:44:45', NULL);
+(8, 'depardieu@gmail.com', 'Depardieu', NULL, '', '$2y$10$TXbwp3V.MrHRPpIGPfbJfe8.96VhuSqgFQQqWu/GIc1OBs7E28dIm', '', '', '0000-00-00 00:00:00', '2015-07-27 16:44:45', NULL),
+(9, 'pouce@gmail.com', 'pouce', NULL, '', '$2y$10$0/vFM3CZfji0TSleGeCbp.CSARKos6L91hiXJhzAuHbuC5UHWJuKK', '', '', '0000-00-00 00:00:00', '2015-07-28 14:15:59', NULL),
+(10, 'pacha@gmail.com', 'pacha', NULL, '', '$2y$10$JJEp.tkDCPOzgLaGQdeqNeSa.2JGOnCsZ2jeOZVrZ6ZsJxXw7OIjm', '', '', '0000-00-00 00:00:00', '2015-07-28 14:18:02', NULL),
+(11, 'popou@gmail.com', 'popou', 'COucou voici ma bio popou', '', '$2y$10$arrzJW1pFkt14nY/J7Lseuh2Xa8ZaWbOvacMfZBXkD6tyhGTS32na', '', '', '0000-00-00 00:00:00', '2015-07-28 16:04:54', '2015-07-28 17:03:56');
 
 --
 -- Indexes for dumped tables
@@ -155,7 +160,7 @@ ALTER TABLE `tags`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=12;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
