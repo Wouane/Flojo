@@ -24,7 +24,8 @@ require("vendor/autoload.php");
 				LIMIT 5";
 		
 		$sth = $dbh->prepare($sql);
-				$sth->execute();
+			   $sth->execute();
+
 		$messages = $sth->fetchAll();
 
 		// ||||||||||||||  AFFICHAGE USERNAME + USER_DESCRIPTION SOUS USER_PICTURE
@@ -42,80 +43,80 @@ require("vendor/autoload.php");
 
 		pr($profile_user);
 
-//////////INSERTION PHOTO///////////////////////////////
+		//////////INSERTION PHOTO///////////////////////////////
 
 
+		$maxSize = 5000000; //5 Mo à peu près
+		$acceptedMimes = array("image/jpeg", "image/gif", "image/png");
+		$acceptedExtensions = array("jpeg", "jpg", "gif", "png"); //qui sait...
+		$minWidth = 150;
+		$minHeight = 150;
 
+		//si on a des fichiers uploadés...
+		if(!empty($_FILES['pic']) && $_FILES['pic']['error'] !=4){
 
-$maxSize = 5000000; //5 Mo à peu près
-$acceptedMimes = array("image/jpeg", "image/gif", "image/png");
-$acceptedExtensions = array("jpeg", "jpg", "gif", "png"); //qui sait...
-$minWidth = 150;
-$minHeight = 150;
+		//iniatilisation de notre variable d'erreur
+		$error = "";
 
-//si on a des fichiers uploadés...
-if(!empty($_FILES['pic']) && $_FILES['pic']['error'] !=4){
+		echo '<pre style="background-color: #2c3e50; color: #fff; font-size: 14px; font-family: Consolas, Monospace; padding: 20px;">';
+		print_r($_FILES);
+		echo '</pre>';
 
-	//iniatilisation de notre variable d'erreur
-	$error = "";
+		//chemin vers le fichier uploadé
+		$tmpName = $_FILES['pic']['tmp_name'];
 
-	echo '<pre style="background-color: #2c3e50; color: #fff; font-size: 14px; font-family: Consolas, Monospace; padding: 20px;">';
-	print_r($_FILES);
-	echo '</pre>';
-
-	//chemin vers le fichier uploadé
-	$tmpName = $_FILES['pic']['tmp_name'];
-
-	//erreurs d'upload détectées par PHP ?
-	if ($_FILES['pic']['error'] != 0){
-		switch ($_FILES['pic']['error']) {
-			case 1:
-				//par rapport au php.ini...
-				$error = "Votre fichier est trop gros !";
-				break;
-			case 4:
-				//peut ne pas être une erreur si le fichier est optionnel...
-				$error = "Aucun fichier n'a été sélectionné !";
-				break;
-			default:
-				$error = "Une erreur est survenue lors du chargement du fichier !";
-				break;
+		//erreurs d'upload détectées par PHP ?
+		if ($_FILES['pic']['error'] != 0){
+			switch ($_FILES['pic']['error']) {
+				case 1:
+					//par rapport au php.ini...
+					$error = "Votre fichier est trop gros !";
+					break;
+				case 4:
+					//peut ne pas être une erreur si le fichier est optionnel...
+					$error = "Aucun fichier n'a été sélectionné !";
+					break;
+				default:
+					$error = "Une erreur est survenue lors du chargement du fichier !";
+					break;
+			}
 		}
-	}
 
-	//poids de l'image ok ?
-	if ($_FILES['pic']['size'] > $maxSize){
-		$error = "Votre image est trop lourde ! $maxSize octets maximum !";
-	}
+		//poids de l'image ok ?
+		if ($_FILES['pic']['size'] > $maxSize){
+			$error = "Votre image est trop lourde ! $maxSize octets maximum !";
+		}
 
-	//largeur et hauteur ok ?
-	$imageSizes = getimagesize($tmpName);
-	if ($imageSizes[0] < $minWidth){
-		$error = "Votre image n'est pas assez large ! $minWidth pixels minimum !";
-	}
-	elseif($imageSizes[1] < $minHeight){
-		$error = "Votre image n'est pas assez haute ! $minHeight pixels minimum !";
-	}
+		//largeur et hauteur ok ?
+		$imageSizes = getimagesize($tmpName);
 
-	//extension du fichier
-	$ext = pathinfo($_FILES['pic']['name'], PATHINFO_EXTENSION);
+		if ($imageSizes[0] < $minWidth){
+			$error = "Votre image n'est pas assez large ! $minWidth pixels minimum !";
+		}
 
-	//extension dans notre white list ?
-	if (!in_array($ext, $acceptedExtensions)){
-		$error = "Ce type de fichier n'est pas accepté !";
-	}
+		elseif($imageSizes[1] < $minHeight){
+			$error = "Votre image n'est pas assez haute ! $minHeight pixels minimum !";
+		}
 
-	//vérifie le type mime
-	$finfo = finfo_open(FILEINFO_MIME_TYPE);
-	$mime = finfo_file($finfo, $tmpName);
+		//extension du fichier
+		$ext = pathinfo($_FILES['pic']['name'], PATHINFO_EXTENSION);
 
-	//le type mime détecté est accepté ?
-	if (!in_array($mime, $acceptedMimes)){
-		$error = "Type de fichier refusé !";
-	}
+		//extension dans notre white list ?
+		if (!in_array($ext, $acceptedExtensions)){
+			$error = "Ce type de fichier n'est pas accepté !";
+		}
 
-	//si on n'a pas détecté d'erreurs, on poursuit avec l'upload...
-	if(empty($error)){
+		//vérifie le type mime
+		$finfo = finfo_open(FILEINFO_MIME_TYPE);
+		$mime = finfo_file($finfo, $tmpName);
+
+		//le type mime détecté est accepté ?
+		if (!in_array($mime, $acceptedMimes)){
+			$error = "Type de fichier refusé !";
+		}
+
+		//si on n'a pas détecté d'erreurs, on poursuit avec l'upload...
+		if(empty($error)){
 
 		//nouveau nom du fichier, sécuritaire (contre les XSS, les espaces, les guillemets, etc.)
 		$newName = md5($tmpName . time() . uniqid()) . "." . $ext;
@@ -138,9 +139,9 @@ if(!empty($_FILES['pic']) && $_FILES['pic']['error'] !=4){
 		//thumbnails
 		$img->thumbnail(150,150)->sepia()->save($destinationDirectory."thumbnails/".$newName);
 
-	}
-	//erreur présente donc...
-	else {
+		}
+		//erreur présente donc...
+		else {
 		//rediriger avec un message d'erreur vers la page contenant le form
 		echo $error;
 	}
@@ -149,7 +150,7 @@ if(!empty($_FILES['pic']) && $_FILES['pic']['error'] !=4){
 
 
 
-/////////////////////////////////////////////////////////		
+		/////////////////////////////////////////////////////////		
 
 
 
