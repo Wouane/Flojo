@@ -29,6 +29,7 @@
 								<label for="password">Mot de passe</label>
 								<input type="password" name="password" placeholder="Mot de passe"/></br>
 								<input type="submit" value="Connexion"/>
+								<input type="reset" class="reset-login" value="Effacer"/>
 							</form>
 							<a class="link-form-login"href="forgot_password.php">Mot de passe oublié ?</a></br>
 							<!-- error pour form login -->
