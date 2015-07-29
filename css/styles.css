@@ -47,12 +47,12 @@ h2.login {
 	border-radius: 5px;
 }
 
+
 .error-login {
 	font-size: 14px;
 	color:#F44336;
-	border:1px solid red;
-	width:50px;
-}
+	width:200px;
+	}
 
 .link-form-login {
 	text-decoration:underline;
