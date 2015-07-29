@@ -50,8 +50,8 @@ include ("includes.php");
 		$maxSize = 5000000; //5 Mo à peu près
 		$acceptedMimes = array("image/jpeg", "image/gif", "image/png");
 		$acceptedExtensions = array("jpeg", "jpg", "gif", "png"); //qui sait...
-		$minWidth = 150;
-		$minHeight = 150;
+		$minWidth = 15;
+		$minHeight = 15;
 
 		//si on a des fichiers uploadés...
 		if(!empty($_FILES['pic']) && $_FILES['pic']['error'] !=4){
