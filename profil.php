@@ -238,8 +238,6 @@ if(!empty($_FILES)){
 ////// dupliquant l'INSERT ou en le modifiant                       //////
 //////////////////////////////////////////////////////////////////////////
 ?>
-
-
 <!DOCTYPE html>
 <html lang="Fr">
 		<head>
@@ -344,18 +342,19 @@ if(!empty($_FILES)){
 				<?php
 					foreach ($messages as $message) {			
 					echo '<pre>';
+					echo '<div class="unique">';
+					echo "<div class='profil-username'><h2>".$_SESSION['user']['username']."</h2></div>";
 					//echo "<div class='profil-message'><p>".$message['date_created'].$message['description']."</p></div>";
 					if(!empty($message['mess_picture'])){
 					// echo "<div><img src='".$_SESSION['mess_picture']."'/></div>";
 						//echo "<img src='upload/' . $_FILES['file']['name']/>;"
-						echo "<img src='img/uploads/thumbnails/".$message['mess_picture']."'/>";
-				}
-				echo "<div class='profil-username'><p>".$_SESSION['user']['username']."</p></div>";
-				echo "<div class='profil-created'><p>".$message['date_created']."</p></div>";
-				echo "<div class='profil-description'><p>".$message['description']."</p></div>";
-				echo "<hr></hr>";
+					echo "<img class='picture_mess' src='img/uploads/thumbnails/".$message['mess_picture']."'/>";
+					}
+					echo "<div class='profil-created'><em>".$message['date_created']."</em></div>";
+					echo "<div class='profil-description'><p>".$message['description']."</p></div>";
+					echo '</div>';
 					echo '</pre>';
-					
+
 				}
 				?>
 		</div>
