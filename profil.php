@@ -219,14 +219,14 @@ if(!empty($_FILES)){
 		$messages = $sth->fetchAll();
 		}
 
-		$sql = "SELECT mess_picture
+		$sql = "SELECT *
 				FROM message 
-				WHERE id_mess = :id_mess
+				
 				ORDER BY date_created DESC";
 	
 		$sth = $dbh ->prepare($sql);
 		$sth-> execute();
-		$message = $sth->fetchAll();
+		$messages = $sth->fetchAll();
 
 }
 
@@ -345,8 +345,10 @@ if(!empty($_FILES)){
 					foreach ($messages as $message) {			
 					echo '<pre>';
 					echo "<div class='profil-message'><p>".$message['description']."</p></div>";
-					if(!empty($_SESSION['message']['mess_picture'])){
-					echo "<img src='".$_SESSION['message']['mess_picture']."'/>";
+					if(!empty($message['mess_picture'])){
+					// echo "<div><img src='".$_SESSION['mess_picture']."'/></div>";
+						//echo "<img src='upload/' . $_FILES['file']['name']/>;"
+						echo "<div><img src='img/uploads/thumbnails/'".$message['mess_picture']."'/></div>";
 				}
 					echo '</pre>';
 					
