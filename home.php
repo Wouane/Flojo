@@ -18,30 +18,31 @@
 			<h1>Bienvenue sur FloJo</h1>
 				<!-- DIV MAIN -->
 			<div class="main-home">
-				<div class="forms">
+				
 						<!--|||||||||||||||||||| LOGIN FORM ||||||||||||||||||||  -->
 					<div class="login-home">
 							<h2 class="login">Connexion</h1>
 		
-							<form method="POST" action="login.php">
+							<form class="login-form" method="POST" action="login.php">
 								<label for="email">Email ou Pseudo</label>
 								<input type="text" name="email" placeholder="Email ou pseudo"/></br>
 								<label for="password">Mot de passe</label>
 								<input type="password" name="password" placeholder="Mot de passe"/></br>
 								<input type="submit" value="Connexion"/>
 								<input type="reset" class="reset-login" value="Effacer"/>
-							</form>
 							<a class="link-form-login"href="forgot_password.php">Mot de passe oublié ?</a></br>
 							<!-- error pour form login -->
-							</div class="error-login">
-							<?php 
-								if (!empty($error)){
-								echo '<div>' . $error . '</div>';
-								}
-							?>
-							</div>
-							<!--  -->
+								
+								<?php 
+								if (!empty($_SESSION['login_error'])){
+									echo '<div class="error-login">' . $_SESSION['login_error'] . '</div>'
+									}			}
+								?>
+								
+							</form>
 					</div>
+							
+							<!--  -->
 							<!-- ||||||||||||||||||FIN LOGIN FORM||||||||||||||||||||||||||||| -->
 
 				<!--|||||||||||||||||||| INSCRIPTION FORM ||||||||||||||||||||-->
@@ -78,7 +79,7 @@
 							</form>
 					</div>
 						<!-- ||||||||||||||||||FIN INSCRIPTION FORM||||||||||||||||||||||||||||| -->
-				</div>
+			</div>
 				<!-- ||||||||||||||||||FIN DIV LOGINS||||||||||||||||||||||||||||| -->
 		</body>
 </html>
