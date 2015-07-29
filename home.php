@@ -21,7 +21,7 @@
 				<div class="forms">
 						<!--|||||||||||||||||||| LOGIN FORM ||||||||||||||||||||  -->
 					<div class="login-home">
-							<h2>Connexion</h1>
+							<h2 class="login">Connexion</h1>
 		
 							<form method="POST" action="login.php">
 								<label for="email">Email ou Pseudo</label>
@@ -46,7 +46,7 @@
 
 				<!--|||||||||||||||||||| INSCRIPTION FORM ||||||||||||||||||||-->
 					<div class="register-home">
-							<h2>Inscription !</h1>
+							<h2 class="register">Inscription !</h1>
 							<form method="POST" id="login_form" action="register.php">
 								<div>
 									<label for="email">Votre email</label>

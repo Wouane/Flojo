@@ -31,6 +31,11 @@ h1 {
 }
 
 	/*------------LOGIN FORM------------*/
+
+h2.login {
+	padding:10px;
+}
+
 .login-home {
 	border:1px solid #ccc;
 	width:330px;
@@ -56,6 +61,10 @@ h1 {
 
 
 	/*----------INSCRIPTION FORM------------*/
+h2.register {
+	padding:10px;
+}
+
 .register-home {
 	border:1px solid #ccc;
 	width:330px;
@@ -130,7 +139,7 @@ p.forgot-password{
 
 }
 
-h2,p.init-password {
+p.init-password {
 	margin-top:25px;
 	text-align: center;
 }
