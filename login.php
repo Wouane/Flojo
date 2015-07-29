@@ -37,7 +37,7 @@
 
 			//redirection vers la page protégée si le mot de passe est bon
 			if (empty($_SESSION['login_error'])){
-				header("Location:home.php");
+				header("Location:profil.php");
 				die();
 			}
 			//
