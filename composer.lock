@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "50a423ad8d1c5c41dbe5a110e59c1634",
+    "hash": "a8728359c628bc5f52c43081f096746e",
     "packages": [
         {
             "name": "abeautifulsite/simpleimage",
