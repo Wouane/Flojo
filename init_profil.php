@@ -6,9 +6,11 @@
 	//lock();
 	//sinon... on ne fait rien et la page ci-dessous s'affichera
 
+	$error="";
+
 	if(!empty($_POST)){
 	//initialisation des variables
-	$user_description = trim(strip_tags($_POST['user_description']));
+		$user_description = trim(strip_tags($_POST['user_description']));
 	// $user_picture = ;
 	
 	// ||||||||||||||||| VALIDATION
@@ -16,14 +18,18 @@
 		// si le champ description est vide
 
 	// champ bio vide ?
-	if(empty($user_description)){
-		$error = "Veuillez renseignez votre bio";
-	}
+		if(empty($user_description)){
+			$error = "Veuillez renseignez votre bio";
+		}
 
 	// bio trop grande ?
-	elseif(strlen($user_description) > 140){
-		$error = "Votre biographie est trop grande";
-	}
+		elseif(strlen($user_description) > 140){
+			$error = "Votre biographie est trop grande";
+		}
+
+		if(empty($error)){
+		header("Location:profil.php");
+		}
 
 	// --------------------------------------------------------------
 	// ||||||||||||||||||||||||||||||||UPDATE INSERT BDD WITH USER_DESCRIPTION
@@ -51,7 +57,8 @@
 	$minWidth = 100;
 	$minHeight = 100;
 
-	}
+}
+
 ?>
 
 
