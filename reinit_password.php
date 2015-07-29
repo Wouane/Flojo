@@ -1,5 +1,6 @@
 <?php 
-		include("includes.php");
+	session_start();
+	include("includes.php");
 
 	//récupère les données de l'URL
 		if (empty($_GET['token']) || empty($_GET['email'])){
@@ -23,7 +24,8 @@
 		$user = $sth->fetch();
 
 		if (!password_verify($token, $user['token'])){
-			header("Location: http://www.disney.com");
+			header("Location: forgot_password.php");
+			$error = "Une erreur est survenue"
 			die();
 		}
 
@@ -98,8 +100,8 @@
 			<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,300,700' rel='stylesheet' type='text/css'>
 		</head>
 		<body>
-			<h1>Choisissez votre nouveau mot de passe</h1>
-			<p class="init-password">Veuillez entrer 2 fois votre nouveau mot de passe ci-dessous</p>
+			<h2 class="title-init-password">Bonjour <?php echo $_SESSION['user']['username'];?>, choisissez votre nouveau mot de passe</h2>
+			<p class="init-password">Veuillez saisir 2 fois votre nouveau mot de passe ci-dessous</p>
 			<div class="main-init-password">
 			<form class="form-init-password" method="POST">
 				<div>
