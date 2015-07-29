@@ -94,9 +94,9 @@ if(!empty($_FILES)){
 		//iniatilisation de notre variable d'erreur
 		$error = "";
 
-		echo '<pre style="background-color: #2c3e50; color: #fff; font-size: 14px; font-family: Consolas, Monospace; padding: 20px;">';
-		print_r($_FILES);
-		echo '</pre>';
+		//echo '<pre style="background-color: #2c3e50; color: #fff; font-size: 14px; font-family: Consolas, Monospace; padding: 20px;">';
+		//print_r($_FILES);
+		//echo '</pre>';
 
 		//chemin vers le fichier uploadé
 		$tmpName = $_FILES['mess_picture']['tmp_name'];
@@ -344,12 +344,16 @@ if(!empty($_FILES)){
 				<?php
 					foreach ($messages as $message) {			
 					echo '<pre>';
-					echo "<div class='profil-message'><p>".$message['date_created'].$message['description']."</p></div>";
+					//echo "<div class='profil-message'><p>".$message['date_created'].$message['description']."</p></div>";
 					if(!empty($message['mess_picture'])){
 					// echo "<div><img src='".$_SESSION['mess_picture']."'/></div>";
 						//echo "<img src='upload/' . $_FILES['file']['name']/>;"
 						echo "<img src='img/uploads/thumbnails/".$message['mess_picture']."'/>";
 				}
+				echo "<div class='profil-username'><p>".$_SESSION['user']['username']."</p></div>";
+				echo "<div class='profil-created'><p>".$message['date_created']."</p></div>";
+				echo "<div class='profil-description'><p>".$message['description']."</p></div>";
+				echo "<hr></hr>";
 					echo '</pre>';
 					
 				}
