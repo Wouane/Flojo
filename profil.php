@@ -258,64 +258,83 @@ if(!empty($_FILES)){
 			<!-- VIGNETTE USER_PICTURE + USERNAME + USER_DESCRIPTION -->
 			<div class="main-profil">
 
-				<!-- VIGNETTE USER_PICTURE + USERNAME + USER_DESCRIPTION -->
+						<!-- VIGNETTE USER_PICTURE + USERNAME + USER_DESCRIPTION -->
 
-					<div class="image-profil">
-						<!-- il faut insérer l'image ci dessous -->
-						<div class="user_picture">
-							<img src="img/default.jpg" alt="photo-profil"/>
+							<div class="image-profil">
+								<!-- il faut insérer l'image ci dessous -->
+								<div class="user_picture">
+									<img src="img/default.jpg" alt="photo-profil"/>
+								</div>
+								<!-- Pseudo user -->
+								<p class="username"><?php echo $_SESSION['user']['username'];?></p>
+								<!-- Bio user -->
+								<p class="user_description"><?php echo $_SESSION['user']['user_description'];?></p>
+							</div>
+							<!-- ............................................ -->
+							
+
+									<!-- FORM POUR ECRIRE LE MESSAGE (tweet) -->
+
+					<form method="POST" action="profil.php" class="add-profil-message" novalidate="novalidate" enctype="multipart/form-data">
+						<input type="hidden" value="2" name="form_name"/>
+
+									<!-- TITRE DU MESSAGE  -->
+						<!-- <label for="title">Saisir le Titre</label></br> -->
+						<input type="text" name="title" class="title-message" id="title" placeholder="Titre de votre message"/>
+						</br>
+
+									<!-- INTITULE DU MESSAGE  -->
+						<!-- <label for="description">Entrez votre message</label></br> -->
+						<textarea name="description" class="description-message" id="description" rows="2" cols="50" placeholder="Votre message (max 140 caractères)" ></textarea>
+						</br>
+											<!-- UPLOAD URL  -->
+						<!-- <label for="url">Ajouter une URL?</label> -->
+						<input type="url" name="url" class="url-message" id="url" placeholder="Votre URL" />
+						</br>	
+
+									<!-- UPLOADE PHOTO  -->
+						<div class="picture-message">
+						<label class="mess_picture">Inserer une photo?</label>
+						<input type="file" name="mess_picture"/>
 						</div>
-						<!-- Pseudo user -->
-						<p class="username"><?php echo $_SESSION['user']['username'];?></p>
-						<!-- Bio user -->
-						<p class="user_description"><?php echo $_SESSION['user']['user_description'];?></p>
-					</div>
-					<!-- ............................................ -->
-					
 
-							<!-- FORM POUR ECRIRE LE MESSAGE (tweet) -->
-
-			<form method="POST" action="profil.php" class="add-profil-message" novalidate="novalidate" enctype="multipart/form-data">
-				<input type="hidden" value="2" name="form_name"/>
-
-							<!-- TITRE DU MESSAGE  -->
-				<!-- <label for="title">Saisir le Titre</label></br> -->
-				<input type="text" name="title" class="title-message" id="title" placeholder="Titre de votre message"/>
-				</br>
-
-							<!-- INTITULE DU MESSAGE  -->
-				<!-- <label for="description">Entrez votre message</label></br> -->
-				<textarea name="description" class="description-message" id="description" rows="2" cols="50" placeholder="Votre message (max 140 caractères)" ></textarea>
-				</br>
-									<!-- UPLOAD URL  -->
-				<!-- <label for="url">Ajouter une URL?</label> -->
-				<input type="url" name="url" class="url-message" id="url" placeholder="Votre URL" />
-				</br>	
-
-							<!-- UPLOADE PHOTO  -->
-				<div class="picture-message">
-				<label class="mess_picture">Inserer une photo?</label>
-				<input type="file" name="mess_picture"/>
-				</div>
-
-					<!-- CREER LE MESSAGE  -->	
-				<input type="submit" class="create-message" value="créer message"/>
-			</form>
+							<!-- CREER LE MESSAGE  -->	
+						<input type="submit" class="create-message" value="Valider"/>
+						<input type="reset" class="reset-message" value="Effacer"/>
+					</form>
 	
 						<!-- ............................................ -->
 
 								<!-- BOUTON AFFICHE 10MIN -->
 
 
-			<div class="affiche10">
-			<form method="POST" action="profil.php" id="affiche10" novalidate="novalidate">
-				<input type="hidden" value="1" name="form_name"/>
-				<input type="submit" class="affiche10" value="affichage 10mn"/>
-			</form>
-			</div>
+				
+						<form method="POST" class="affiche10" novalidate="novalidate">
+							<input type="hidden" value="1" name="form_name"/>
+							<input type="submit" class="affiche10" value="affichage 10 min"/>
+						</form>
+					
+					<!-- ............................................ -->
+
+								<!-- AFFICHE TAGS -->
+					
+					<div class="list-tags">
+						<p>Liste de tags</p>
+						<ul>
+							<li></li>
+							<li></li>
+							<li></li>
+							<li></li>
+							<li></li>
+							<li></li>
+							<li></li>
+							<li></li>
+							<li></li>
+						</ul>
+					</div>
 
 					<!-- ............................................ -->
-				</br>
+			
 			</div>
 
 		</br>
