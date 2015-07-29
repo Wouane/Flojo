@@ -7,10 +7,10 @@
 	$email = $_POST['email'];
 	$password = $_POST['password'];
 
-	$sql = "SELECT * FROM users 
+	$sql = "SELECT *
+			FROM users 
 			WHERE email = :email 
-			OR username = :email 
-			LIMIT 1";
+			OR username = :email";
 
 	$sth = $dbh->prepare($sql);
 	$sth->bindValue(":email", $email);
@@ -35,16 +35,25 @@
 			//toutes les données seront disponible sur toutes les pages !
 			$_SESSION["user"] = $foundUser;
 
-			//redirection vers la page protégée 
-			header("Location:profil.php");
-			die();
+			//redirection vers la page protégée si le mot de passe est bon
+			if (empty($_SESSION['login_error'])){
+				header("Location:home.php");
+				die();
+			}
+			//
 		}
 		else {
 			//redirection vers login avec message d'erreur
 			$_SESSION['login_error'] = "Mauvais mot de passe !";
 			header("Location:home.php");
 			die();
+
 		}
+
+	// if(empty($email) && empty($password))	{
+	// 		$_SESSION['login_error'] = " Vous devez inscrire quelque chose dans les champs !";
+	// 		header("Location:login.php");
+	// }
 
 	}
 	else {
