@@ -152,11 +152,76 @@ input.submit-init-password {
 	width:100%;
 	margin:100px 0;
 	border:1px solid black;
+	padding:10px;
 }
 
-.title-profil {
+h2.title-profil {
 	text-align: center;
 }
+
+
+/*----------------ENCART PROFIL----------------*/
+
+.image-profil {
+	border:1px solid red;
+	width:200px;
+	clear:both;
+}
+
+.user_picture {
+	margin:5px auto;
+	padding:5px;
+	border:1px solid red;
+	width:180px;
+	overflow: auto;
+}
+
+.username {
+	width:180px;
+	border:1px solid red;
+	margin:5px auto;
+	padding:5px;
+}
+
+.user_description{
+	width:180px;
+	border:1px solid red;
+	margin:5px auto;
+	padding:5px;
+}
+
+
+/*---------------FIN -ENCART PROFIL----------------*/
+
+
+/*---------------ENCART INSERT MESSAGE----------------*/
+
+.add-profil-message{
+	border:1px solid blue;
+}
+
+.title-message{
+	margin:5px;
+	width:200px;
+}
+
+.description-message {
+	margin:5px;
+}
+
+.picture-message{
+	margin:5px;
+}
+
+.url-message{
+	margin:5px;
+	width:250px;
+}
+
+
+
+/*---------------FIN -INSERT MESSAGE----------------*/
+
 
 
 /*================================================================*/

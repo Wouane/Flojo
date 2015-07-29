@@ -42,7 +42,7 @@ include ("includes.php");
 		$sth-> execute();
 		$profile_user = $sth->fetchAll();
 
-		pr($profile_user);
+		// pr($profile_user);
 
 		//////////INSERTION PHOTO///////////////////////////////
 
@@ -205,18 +205,17 @@ if(!empty($_POST)){
 		$sth-> execute();
 		$messages = $sth->fetchAll();
 		}
+}
 
+// pr($messages);
 	
 //////////////////////////////////////////////////////////////////////////
 ////// ajouter d'autres champs, ici uniquement message[description] //////
 ////// prevoir ajout d'autres champs dans d'autres tables en        //////
 ////// dupliquant l'INSERT ou en le modifiant                       //////
 //////////////////////////////////////////////////////////////////////////
-
-}
-pr($messages);
-
 ?>
+
 
 <!DOCTYPE html>
 <html lang="Fr">
@@ -242,13 +241,44 @@ pr($messages);
 							<img src="img/default.jpg" alt="photo-profil"/>
 						</div>
 						<!-- Pseudo user -->
-						<p><?php echo $_SESSION['user']['username'];?></p>
+						<p class="username"><?php echo $_SESSION['user']['username'];?></p>
 						<!-- Bio user -->
-						<p><?php echo $_SESSION['user']['user_description'];?></p>
+						<p class="user_description"><?php echo $_SESSION['user']['user_description'];?></p>
 
 					</div>
 					<!-- ............................................ -->
 					
+
+							<!-- FORM POUR ECRIRE LE MESSAGE (tweet) -->
+
+			<form method="POST" action="profil.php" class="add-profil-message" novalidate="novalidate" enctype="multipart/form-data">
+				<input type="hidden" value="2" name="form_name"/>
+
+							<!-- TITRE DU MESSAGE  -->
+				<!-- <label for="title">Saisir le Titre</label></br> -->
+				<input type="text" name="title" class="title-message" id="title" placeholder="Titre de votre message"/>
+				</br>
+
+							<!-- INTITULE DU MESSAGE  -->
+				<!-- <label for="description">Entrez votre message</label></br> -->
+				<textarea name="description" class="description-message" id="description" rows="4" cols="50" placeholder="Votre message (max 140 caractères)" ></textarea>
+				</br>
+									<!-- UPLOAD URL  -->
+				<!-- <label for="url">Ajouter une URL?</label> -->
+				<input type="url" name="url" class="url-message" id="url" placeholder="Votre URL" />
+				</br>	
+
+							<!-- UPLOADE PHOTO  -->
+				<div class="picture-message">
+				<label for="mess_picture">Inserer une photo?</label>
+				<input type="file" name="mess_picture"/>
+				</div>
+					<!-- CREER LE MESSAGE  -->	
+				<input type="submit" class="create-message" value="créer message"/>
+			</form>
+
+						<!-- ............................................ -->
+
 								<!-- BOUTON AFFICHE 10MIN -->
 
 
@@ -260,40 +290,9 @@ pr($messages);
 			</div>
 
 					<!-- ............................................ -->
-
-							<!-- FORM POUR ECRIRE LE MESSAGE (tweet) -->
-
-			<form method="POST" action="profil.php" id="add-profil-message" novalidate="novalidate" enctype="multipart/form-data">
-				<input type="hidden" value="2" name="form_name"/>
-
-							<!-- TITRE DU MESSAGE  -->
-				<!-- <label for="title">Saisir le Titre</label></br> -->
-				<input type="text" name="title" id="title" placeholder="Tapez votre titre"/>
 				</br>
-
-							<!-- INTITULE DU MESSAGE  -->
-				<!-- <label for="description">Entrez votre message</label></br> -->
-				<textarea name="description" id="description" rows="4" cols="50" placeholder="Tapez votre description" ></textarea>
-				</br>
-
-							<!-- UPLOADE PHOTO  -->
-				<label for="mess_picture">Inserer une photo?</label>
-				<input type="file" name="mess_picture"/>
-				</br>
-
-								<!-- UPLOAD URL  -->
-				<!-- <label for="url">Ajouter une URL?</label> -->
-				<input type="url" name="url" id="url" placeholder="Votre URL" />
-				</br>	
-					<!-- CREER LE MESSAGE  -->	
-				<input type="submit" class="add-profil-message" value="créer message"/>
-			</form>
-
-						<!-- ............................................ -->
-
-				</br>
-				<a class="logout" href="logout.php" title="Me déconnecter">Déconnexion</a>
 			</div>
+			<a class="logout" href="logout.php" title="Me déconnecter">Déconnexion</a>
 		</br>
 						<!-- AFFICHAGE DES MESSAGEs (tweet) -->
 
