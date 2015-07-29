@@ -54,7 +54,7 @@ include ("includes.php");
 		$minHeight = 15;
 
 		//si on a des fichiers uploadés...
-		if(!empty($_FILES['pic']) && $_FILES['pic']['error'] !=4){
+		if(!empty($_FILES['mess_picture']) && $_FILES['mess_picture']['error'] !=4){
 
 		//iniatilisation de notre variable d'erreur
 		$error = "";
@@ -64,11 +64,11 @@ include ("includes.php");
 		echo '</pre>';
 
 		//chemin vers le fichier uploadé
-		$tmpName = $_FILES['pic']['tmp_name'];
+		$tmpName = $_FILES['mess_picture']['tmp_name'];
 
 		//erreurs d'upload détectées par PHP ?
-		if ($_FILES['pic']['error'] != 0){
-			switch ($_FILES['pic']['error']) {
+		if ($_FILES['mess_picture']['error'] != 0){
+			switch ($_FILES['mess_picture']['error']) {
 				case 1:
 					//par rapport au php.ini...
 					$error = "Votre fichier est trop gros !";
@@ -84,7 +84,7 @@ include ("includes.php");
 		}
 
 		//poids de l'image ok ?
-		if ($_FILES['pic']['size'] > $maxSize){
+		if ($_FILES['mess_picture']['size'] > $maxSize){
 			$error = "Votre image est trop lourde ! $maxSize octets maximum !";
 		}
 
@@ -100,10 +100,10 @@ include ("includes.php");
 		}
 
 		//extension du fichier
-		$ext = pathinfo($_FILES['pic']['name'], PATHINFO_EXTENSION);
+		$ext = pathinfo($_FILES['mess_picture']['name'], PATHINFO_EXTENSION);
 
 		//extension dans notre white list ?
-		if (!in_array($ext, $acceptedExtensions)){
+		if (!in_array(strtolower($ext), $acceptedExtensions)){
 			$error = "Ce type de fichier n'est pas accepté !";
 		}
 
@@ -277,8 +277,8 @@ pr($messages);
 				</br>
 
 							<!-- UPLOADE PHOTO  -->
-				<label for="pic">Inserer une photo?</label>
-				<input type="file" name="pic"/>
+				<label for="mess_picture">Inserer une photo?</label>
+				<input type="file" name="mess_picture"/>
 				</br>
 
 								<!-- UPLOAD URL  -->
@@ -302,7 +302,11 @@ pr($messages);
 					foreach ($messages as $message) {			
 					echo '<pre>';
 					echo "<div class='profil-message'><p>".$message['description']."</p></div>";
+					if(!empty($_SESSION['user']['mess_picture'])){
+					echo "<img src='$_SESSION[user][mess_picture];?>";
+				}
 					echo '</pre>';
+					
 				}
 				?>
 		</div>
