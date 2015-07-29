@@ -348,7 +348,7 @@ if(!empty($_FILES)){
 					if(!empty($message['mess_picture'])){
 					// echo "<div><img src='".$_SESSION['mess_picture']."'/></div>";
 						//echo "<img src='upload/' . $_FILES['file']['name']/>;"
-						echo "<div><img src='img/uploads/thumbnails/'".$message['mess_picture']."'/></div>";
+						echo "<img src='img/uploads/thumbnails/".$message['mess_picture']."'/>";
 				}
 					echo '</pre>';
 					
