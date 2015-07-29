@@ -1,7 +1,7 @@
 <?php 
 	session_start();
 	include("includes.php");
-	pr($_SESSION);
+	// pr($_SESSION);
 	//vérification que l'utilisateur est bien connecté
 	//lock();
 	//sinon... on ne fait rien et la page ci-dessous s'affichera
