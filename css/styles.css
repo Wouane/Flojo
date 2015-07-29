@@ -32,22 +32,39 @@ h1 {
 
 	/*------------LOGIN FORM------------*/
 .login-home {
-	border:1px solid blue;
-	width:300px;
+	border:1px solid #ccc;
+	width:330px;
 	right:5px;
 	float:right;
 	margin-right:100px;	
 	margin-bottom:50px;
+	padding:10px;
+	border-radius: 5px;
 }
+
+.error-login {
+	font-size: 14px;
+	color:#F44336;
+	border:1px solid red;
+	width:50px;
+}
+
+.link-form-login {
+	text-decoration:underline;
+	font-size: 12px;
+}
+
 
 	/*----------INSCRIPTION FORM------------*/
 .register-home {
-	border:1px solid red;
-	width:300px;
+	border:1px solid #ccc;
+	width:330px;
 	right:5px;
 	float:right;
 	clear:both;
-	margin-right:100px;	
+	margin-right:100px;
+	padding:10px;
+	border-radius: 5px;
 }
 
 
@@ -58,7 +75,7 @@ h1 {
 
 .main-forgot-password {
 	width:100%;
-	margin:50px 0;
+	margin:10px 0;
 	overflow: auto;
 }
 
@@ -67,8 +84,11 @@ h1 {
 }
 
 .form-forgot-password {
-	margin:50px auto;
+	margin:10px auto;
 	width:220px;
+	padding:10px;
+	border-radius:5px;
+	border:1px solid #ccc;
 }
 
 .email-forgot-password {
@@ -87,6 +107,7 @@ h1 {
 .message {
 	color:#00E676;
 	text-align: center;
+	margin-top:0;
 }
 
 
@@ -100,7 +121,17 @@ h1 {
 	overflow: auto;
 }
 
-p.init-password {
+p.forgot-password{
+	margin-bottom:30px;
+	}
+
+.title-init-password{
+	margin-top:20px;
+
+}
+
+h2,p.init-password {
+	margin-top:25px;
 	text-align: center;
 }
 
@@ -138,6 +169,10 @@ input.submit-init-password {
 	overflow: auto;
 }
 
+h2 {
+	text-align: center,
+}
+
 .logout {
 	text-decoration: underline;
 	position:absolute;
@@ -156,5 +191,5 @@ input.submit-init-profil {
 
 .init-profil-error {
 	text-align:center;
-	color:color:#F44336;;
+	color:#F44336;;
 }
