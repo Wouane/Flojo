@@ -3,6 +3,8 @@
 	//pour inclure nos librairies composerinclude("db.php");
 	include("includes.php");
 	pr($_POST);
+
+
 	?>
 <!doctype html>
 <html lang="FR">
@@ -35,8 +37,9 @@
 								
 								<?php 
 								if (!empty($_SESSION['login_error'])){
-									echo '<div class="error-login">' . $_SESSION['login_error'] . '</div>'
-									}			}
+									echo '<div class="error-login">' . $_SESSION['login_error'] . '</div>';
+									unset($_SESSION['login_error']);
+									}			
 								?>
 								
 							</form>
@@ -48,7 +51,7 @@
 				<!--|||||||||||||||||||| INSCRIPTION FORM ||||||||||||||||||||-->
 					<div class="register-home">
 							<h2 class="register">Inscription !</h1>
-							<form method="POST" id="login_form" action="register.php">
+							<form method="POST" id="login_form" action="register.php" >
 								<div>
 									<label for="email">Votre email</label>
 									<input type="email" name="email" id="email"/>
@@ -73,13 +76,15 @@
 								if (!empty($error)){
 									echo '<div>' . $error . '</div>';
 								}
+											
 								?>
-								<!-- fin php error -->
 								</div>
 							</form>
 					</div>
 						<!-- ||||||||||||||||||FIN INSCRIPTION FORM||||||||||||||||||||||||||||| -->
 			</div>
+
+			
 				<!-- ||||||||||||||||||FIN DIV LOGINS||||||||||||||||||||||||||||| -->
 		</body>
 </html>
