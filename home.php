@@ -30,17 +30,15 @@
 								<input type="password" name="password" placeholder="Mot de passe"/></br>
 								<input type="submit" value="Connexion"/>
 							</form>
-							<a href="forgot_password.php">Mot de passe oublié ?</a>
+							<a class="link-form-login"href="forgot_password.php">Mot de passe oublié ?</a></br>
 							<!-- error pour form login -->
+							</div class="error-login">
 							<?php 
-								//si on a stocké un message d'erreur (dans login_handler.php)
-								if(!empty($_SESSION['login_error'])){
-									//affiche le message d'erreur
-									echo $_SESSION['login_error']; 
-									//on a affiché le message, alors on peut le virer
-									unset($_SESSION['login_error']);
+								if (!empty($error)){
+								echo '<div>' . $error . '</div>';
 								}
 							?>
+							</div>
 							<!--  -->
 					</div>
 							<!-- ||||||||||||||||||FIN LOGIN FORM||||||||||||||||||||||||||||| -->
@@ -66,13 +64,16 @@
 									<input type="password" name="password_confirm" id="password_confirm"/>
 								</div>
 								<input type="submit" value="Valider"/>
+								<button type="reset">Effacer</button>
 								<!-- php error pour form inscription -->
+								<div class="error-register">
 								<?php 
 								if (!empty($error)){
 									echo '<div>' . $error . '</div>';
 								}
 								?>
 								<!-- fin php error -->
+								</div>
 							</form>
 					</div>
 						<!-- ||||||||||||||||||FIN INSCRIPTION FORM||||||||||||||||||||||||||||| -->
