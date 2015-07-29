@@ -1,4 +1,6 @@
 <?php 
+	session_start();
+
 	include("includes.php");
 	//si le form est soumis...
 	if (!empty($_POST)){
@@ -88,7 +90,7 @@
 					if (!$mail->send()) {
 						$error = "Une erreur de survenue. Le mail n'a pas été envoyé !";
 					} else {
-						$message = "Merci, Allez voir vos mails !";
+						$message = "Merci, nous venons d'envoyer un mail contenant un lien vous permettant de recréer un nouveau mot de passe.";
 					}
 				}
 				else {
@@ -115,9 +117,10 @@
 		</head>
 		<body>
 			<div class="main-forgot-password">
-				<h1 class="forgot-password">Mot de passe oublié</h1>
-				<p class="forgot-password">Veuillez entrer l'adresse email utilisée lors de votre inscription.</p>
-				<p class="forgot-password">Nous y enverrons un message permettant de créer un nouveau mot de passe.</p>
+				<h2 class="forgot-password">Bonjour <?php echo $_SESSION['user']['username'];?> , </h2>
+				<p class="forgot-password">Pour réinitialiser votre mot de passe veuillez entrer l'adresse</br>
+				 email utilisée lors de votre inscription.</p>
+				
 				<form class="form-forgot-password" method="POST">
 						<input class="email-forgot-password" type="text" name="email" placeholder="Votre email" />
 						<input class="submit-forgot-password" type="submit" value="OK" />
