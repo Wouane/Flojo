@@ -84,7 +84,7 @@ h2.register {
 
 .main-forgot-password {
 	width:100%;
-	margin:10px 0;
+	margin:50px 0;
 	overflow: auto;
 }
 
@@ -242,9 +242,16 @@ h2.title-profil {
 	width:420px;
 }
 
+/*---------------ENCART AFFICHE MESSAGE----------------*/
+
+.affiche-message {
+	border:1px solid orange;
+	padding:5px;
+	width:700px;
+}
 
 
-/*---------------FIN -INSERT MESSAGE----------------*/
+/*---------------affiche 10----------------*/
 
 .affiche10{
 	position:absolute;
@@ -255,7 +262,17 @@ h2.title-profil {
 
 
 
-/*---------------FIN -INSERT MESSAGE----------------*/
+/*---------------FIN -affiche10----------------*/
+
+/*---------------LIST TAGS----------------*/
+
+
+.list-tags {
+	width:200px;
+	height:600px;
+	position:absolute;
+	top:40px;
+}
 
 
 /*================================================================*/
