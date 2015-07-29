@@ -153,6 +153,8 @@ input.submit-init-password {
 	margin:100px 0;
 	border:1px solid black;
 	padding:10px;
+	overflow: auto;
+	position:relative;
 }
 
 h2.title-profil {
@@ -165,8 +167,8 @@ h2.title-profil {
 .image-profil {
 	border:1px solid red;
 	width:200px;
-	clear:both;
-}
+	padding:10px;
+	}
 
 .user_picture {
 	margin:5px auto;
@@ -190,6 +192,10 @@ h2.title-profil {
 	padding:5px;
 }
 
+.link-modif-profil{
+	text-decoration:underline;
+	font-size: 14px;
+}
 
 /*---------------FIN -ENCART PROFIL----------------*/
 
@@ -198,6 +204,11 @@ h2.title-profil {
 
 .add-profil-message{
 	border:1px solid blue;
+	width:500px;
+	position:absolute;
+	padding:10px;
+	top:10px;
+	right:10px;
 }
 
 .title-message{
@@ -218,6 +229,7 @@ h2.title-profil {
 	width:250px;
 }
 
+label
 
 
 /*---------------FIN -INSERT MESSAGE----------------*/

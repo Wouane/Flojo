@@ -244,7 +244,7 @@ if(!empty($_POST)){
 						<p class="username"><?php echo $_SESSION['user']['username'];?></p>
 						<!-- Bio user -->
 						<p class="user_description"><?php echo $_SESSION['user']['user_description'];?></p>
-
+						<a class="link-modif-profil" href="modif-profil.php">Modifier votre profil</a>
 					</div>
 					<!-- ............................................ -->
 					
@@ -270,7 +270,7 @@ if(!empty($_POST)){
 
 							<!-- UPLOADE PHOTO  -->
 				<div class="picture-message">
-				<label for="mess_picture">Inserer une photo?</label>
+				<label class="for="mess_picture">Inserer une photo?</label>
 				<input type="file" name="mess_picture"/>
 				</div>
 					<!-- CREER LE MESSAGE  -->	
