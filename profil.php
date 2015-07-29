@@ -344,7 +344,7 @@ if(!empty($_FILES)){
 				<?php
 					foreach ($messages as $message) {			
 					echo '<pre>';
-					echo "<div class='profil-message'><p>".$message['description']."</p></div>";
+					echo "<div class='profil-message'><p>".$message['date_created'].$message['description']."</p></div>";
 					if(!empty($message['mess_picture'])){
 					// echo "<div><img src='".$_SESSION['mess_picture']."'/></div>";
 						//echo "<img src='upload/' . $_FILES['file']['name']/>;"
