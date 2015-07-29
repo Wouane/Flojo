@@ -249,6 +249,8 @@ if(!empty($_FILES)){
 			<link href="css/styles.css" type="text/css" rel="stylesheet" media="screen">
 			<!-- feuilles CSS -->
 			<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,300,700' rel='stylesheet' type='text/css'>
+			<!-- feuilles CSS -->
+			<link rel="stylesheet" href="css/font-awesome/css/font-awesome.css" />
 		</head>
 		<body>
 			<!-- TITRE DE LA PAGE -->
@@ -267,7 +269,6 @@ if(!empty($_FILES)){
 						<p class="username"><?php echo $_SESSION['user']['username'];?></p>
 						<!-- Bio user -->
 						<p class="user_description"><?php echo $_SESSION['user']['user_description'];?></p>
-						<a class="link-modif-profil" href="modif-profil.php">Modifier votre profil</a>
 					</div>
 					<!-- ............................................ -->
 					
@@ -284,7 +285,7 @@ if(!empty($_FILES)){
 
 							<!-- INTITULE DU MESSAGE  -->
 				<!-- <label for="description">Entrez votre message</label></br> -->
-				<textarea name="description" class="description-message" id="description" rows="4" cols="50" placeholder="Votre message (max 140 caractères)" ></textarea>
+				<textarea name="description" class="description-message" id="description" rows="2" cols="50" placeholder="Votre message (max 140 caractères)" ></textarea>
 				</br>
 									<!-- UPLOAD URL  -->
 				<!-- <label for="url">Ajouter une URL?</label> -->
@@ -296,10 +297,11 @@ if(!empty($_FILES)){
 				<label class="mess_picture">Inserer une photo?</label>
 				<input type="file" name="mess_picture"/>
 				</div>
+
 					<!-- CREER LE MESSAGE  -->	
 				<input type="submit" class="create-message" value="créer message"/>
 			</form>
-
+	
 						<!-- ............................................ -->
 
 								<!-- BOUTON AFFICHE 10MIN -->
@@ -315,7 +317,7 @@ if(!empty($_FILES)){
 					<!-- ............................................ -->
 				</br>
 			</div>
-			<a class="logout" href="logout.php" title="Me déconnecter">Déconnexion</a>
+
 		</br>
 						<!-- AFFICHAGE DES MESSAGEs (tweet) -->
 
@@ -332,5 +334,7 @@ if(!empty($_FILES)){
 				}
 				?>
 		</div>
+		<a class="logout" href="logout.php" title="Me déconnecter"><i class="fa fa-sign-out"></i> Déconnexion</a>
+		<a class="link-modif-profil" href="modif-profil.php"><i class="fa fa-cog"></i>  Modifier votre profil</a>
 	</body>
 </html>
