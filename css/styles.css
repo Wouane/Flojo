@@ -268,10 +268,12 @@ h2.title-profil {
 
 
 .list-tags {
-	width:200px;
+	width:125px;
 	height:600px;
+	border:1px solid purple;
 	position:absolute;
-	top:40px;
+	top:70px;
+	right:20px;
 }
 
 
