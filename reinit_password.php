@@ -25,7 +25,6 @@
 
 		if (!password_verify($token, $user['token'])){
 			header("Location: forgot_password.php");
-			$error = "Une erreur est survenue"
 			die();
 		}
 
