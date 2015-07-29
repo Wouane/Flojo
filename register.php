@@ -2,8 +2,8 @@
 	session_start();
 	//pour inclure nos librairies composer
 	include("includes.php");
+	pr($_POST);
 	//tester la soumission du formulaire avec un print_r()
-	// $error_register = "";
 	//si le form est soumis...
 	if (!empty($_POST)){
 
@@ -15,6 +15,11 @@
 		$password_confirm = trim(strip_tags($_POST['password_confirm']));
 
 		//validation
+
+		if(empty($_POST)){
+			header("Location:home.php");
+			die();
+		}
 
 		//email vide ?
 		if(empty($email)){
@@ -95,6 +100,9 @@
 						un chiffre et un caractère spécial.";
 			}
 		}
+
+	
+
 		//si on n'a pas d'erreur 
 		//en d'autre mots, si notre variable est encore vierge
 		if (empty($error)){
@@ -129,7 +137,7 @@
 			$sth->execute();
 			$user = $sth->fetch();
 
-			//on met l'array dans la session pour connecter le user
+			// on met l'array dans la session pour connecter le user
 			$_SESSION['user'] = $user;
 			//puis on redirige vers la page protégée
 			header("Location:init_profil.php");
