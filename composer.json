@@ -1,0 +1,9 @@
+{
+    "require": {
+        "ircmaxell/password-compat": "^1.0",
+        "phpmailer/phpmailer": "^5.2",
+        "ircmaxell/random-lib": "^1.1",
+        "abeautifulsite/SimpleImage": "^2.5",
+        "fzaninotto/faker": "^1.5"
+    }
+}
