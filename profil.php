@@ -44,7 +44,40 @@ include ("includes.php");
 
 		// pr($profile_user);
 
-		//////////INSERTION PHOTO///////////////////////////////
+		
+
+
+
+		/////////////////////////////////////////////////////////		
+
+
+
+			// ---------------------------------------------------------------------------
+		// ||||||||||||||||||||INSERTION DU MESSAGE SUR LA PAGE||||||||||||||||||||||||||||||
+			// ---------------------------------------------------------------------------
+
+
+
+if(!empty($_POST)){
+
+		if ($_POST['form_name'] == "2"){
+			// |||||||||||||INSCRIPTION MESSAGE DANS LA BDD
+			$description = trim(strip_tags($_POST['description']));
+			$title = trim(strip_tags($_POST['title']));
+			$url = trim(strip_tags($_POST['url']));
+			
+	
+			$sql = "INSERT INTO message (id_mess, title, description, url, date_created, date_expiry)
+					VALUES (NULL, :title, :description, :url, NOW(), NOW())";
+	
+			$sth = $dbh->prepare($sql);
+			$sth ->bindValue(":title",$title);
+			$sth ->bindValue(":description",$description); 
+			$sth ->bindValue(":url",$url); 
+			
+			$sth->execute();   
+		}
+//////////INSERTION PHOTO///////////////////////////////
 
 
 		$maxSize = 5000000; //5 Mo à peu près
@@ -147,39 +180,6 @@ include ("includes.php");
 		echo $error;
 	}
 }
-
-
-
-
-		/////////////////////////////////////////////////////////		
-
-
-
-			// ---------------------------------------------------------------------------
-		// ||||||||||||||||||||INSERTION DU MESSAGE SUR LA PAGE||||||||||||||||||||||||||||||
-			// ---------------------------------------------------------------------------
-
-
-
-if(!empty($_POST)){
-
-		if ($_POST['form_name'] == "2"){
-			// |||||||||||||INSCRIPTION MESSAGE DANS LA BDD
-			$description = trim(strip_tags($_POST['description']));
-			$title = trim(strip_tags($_POST['title']));
-			$url = trim(strip_tags($_POST['url']));
-			$mess_picture = trim(strip_tags($_POST['mess_picture']));
-	
-			$sql = "INSERT INTO message (id_mess, title, description, url, mess_picture, date_created, date_expiry)
-					VALUES (NULL, :title, :description, :url, :mess_picture, NOW(), NOW())";
-	
-			$sth = $dbh->prepare($sql);
-			$sth ->bindValue(":title",$title);
-			$sth ->bindValue(":description",$description); 
-			$sth ->bindValue(":url",$url); 
-			$sth ->bindValue(":mess_picture",$mess_picture); 
-			$sth->execute();   
-		}
 
 		// ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 		//      AFFICHAGE MESSAGE SUR PAGE PROFIL.PHP
@@ -302,7 +302,7 @@ if(!empty($_POST)){
 					echo '<pre>';
 					echo "<div class='profil-message'><p>".$message['description']."</p></div>";
 					if(!empty($_SESSION['user']['mess_picture'])){
-					echo "<img src='$_SESSION[user][mess_picture];?>";
+					echo "<img src='".$_SESSION['user']['mess_picture']."'/>";
 				}
 					echo '</pre>';
 					
