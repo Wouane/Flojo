@@ -77,9 +77,11 @@ if(!empty($_POST)){
 			
 			$sth->execute();   
 		}
+
+}
 //////////INSERTION PHOTO///////////////////////////////
 
-
+if(!empty($_FILES)){
 		$maxSize = 5000000; //5 Mo à peu près
 		$acceptedMimes = array("image/jpeg", "image/gif", "image/png");
 		$acceptedExtensions = array("jpeg", "jpg", "gif", "png"); //qui sait...
@@ -172,13 +174,24 @@ if(!empty($_POST)){
 		$img->best_fit(600,600)->save($destinationDirectory."mediums/".$newName);
 		//thumbnails
 		$img->thumbnail(150,150)->sepia()->save($destinationDirectory."thumbnails/".$newName);
+		$sql = "UPDATE message 
+			SET mess_picture = :mess_picture
+		
+			WHERE id_mess = :id_mess";
 
+		$sth = $dbh->prepare($sql);
+		$sth->bindValue(":mess_picture",$newName);
+		// $sth->bindValue(":user_picture", $user_picture);
+		$sth->bindValue(":id_mess", $dbh->lastInsertId());
+		// $sth->bindValue(":user_picture", $user_picture);
+		$sth->execute();
 		}
 		//erreur présente donc...
 		else {
 		//rediriger avec un message d'erreur vers la page contenant le form
 		echo $error;
 	}
+	
 }
 
 		// ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
@@ -205,6 +218,16 @@ if(!empty($_POST)){
 		$sth-> execute();
 		$messages = $sth->fetchAll();
 		}
+
+		$sql = "SELECT mess_picture
+				FROM message 
+				WHERE id_mess = :id_mess
+				ORDER BY date_created DESC";
+	
+		$sth = $dbh ->prepare($sql);
+		$sth-> execute();
+		$message = $sth->fetchAll();
+
 }
 
 // pr($messages);
@@ -270,7 +293,7 @@ if(!empty($_POST)){
 
 							<!-- UPLOADE PHOTO  -->
 				<div class="picture-message">
-				<label class="for="mess_picture">Inserer une photo?</label>
+				<label class="mess_picture">Inserer une photo?</label>
 				<input type="file" name="mess_picture"/>
 				</div>
 					<!-- CREER LE MESSAGE  -->	
@@ -301,8 +324,8 @@ if(!empty($_POST)){
 					foreach ($messages as $message) {			
 					echo '<pre>';
 					echo "<div class='profil-message'><p>".$message['description']."</p></div>";
-					if(!empty($_SESSION['user']['mess_picture'])){
-					echo "<img src='".$_SESSION['user']['mess_picture']."'/>";
+					if(!empty($_SESSION['message']['mess_picture'])){
+					echo "<img src='".$_SESSION['message']['mess_picture']."'/>";
 				}
 					echo '</pre>';
 					
